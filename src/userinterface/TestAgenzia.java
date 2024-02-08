@@ -44,14 +44,15 @@ public class TestAgenzia {
 
         try {
             //input dei parametri
+            System.out.println("inserisci i dati della prenotazione");
             String nomeCliente = LeggiConsole.getStringNonVuota("inserisci il nome del cliente: ");
-            LocalDate dataInizioSoggiorno = LeggiConsole.getLocalDate("inserisci la data iniziale  (in formato dd-MM-yyyy : ", "il formato non è corretto ( reinserisci nel formato dd-MM-yyyy)");
+            LocalDate dataInizioSoggiorno = LeggiConsole.getLocalDate("inserisci la data iniziale  (in formato dd-MM-yyyy) : ", "il formato non è corretto ( reinserisci nel formato dd-MM-yyyy)");
           
             LocalDate dataFineSoggiorno = LeggiConsole.getLocalDate("inserisci la data finale(in formato dd-MM-yyyy : ", "il formato non è corretto ( reinserisci nel formato dd-MM-yyyy)");
             TipoCamera tipoCamera = utils.LeggiConsole.getCamera("inserisci il tipo di camera che desidera"
-                    + " inserire", "errore! la tipologia di camera da lei selezionata non è valida, i tipi di camera previsti sono:" + TipoCamera.listOfConstants());
+                    + " inserire " + TipoCamera.listOfConstants(), "errore! la tipologia di camera da lei selezionata non è valida, i tipi di camera previsti sono:" + TipoCamera.listOfConstants());
             TipoPensione tipoPensione = utils.LeggiConsole.getTipoPensione("inserisci il tipo di pensione che desidera"
-                    + " inserire", "errore! la tipologia di pensione da lei selezionata non è valida, i tipi di pensione previsti sono:" + TipoPensione.listOfConstants());
+                    + " inserire " + TipoPensione.listOfConstants(), "errore! la tipologia di pensione da lei selezionata non è valida, i tipi di pensione previsti sono:" + TipoPensione.listOfConstants());
             
             boolean wifi=LeggiConsole.getYesNo("inserisci true(se include il wifi) o false(se non include il wifi) ", "errore");
             boolean parcheggio=LeggiConsole.getYesNo("inserisci true(se include il parcheggio) o false(se non include il parcheggio) ", "errore");
@@ -63,12 +64,15 @@ public class TestAgenzia {
                             dataInizioSoggiorno, dataFineSoggiorno, wifi, parcheggio, balcone));
                 } catch (CloneNotSupportedException ex) {
                     Logger.getLogger(TestAgenzia.class.getName()).log(Level.SEVERE, null, ex);
+                    System.err.println("errore nella clonazione dell'oggetto prenotazione");
                 }
             } catch (AgenziaException ex) {
                 Logger.getLogger(TestAgenzia.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println("errore nella creazione dell'oggetto prenotazione");
             }
         } catch (IOException ex) {
             Logger.getLogger(TestAgenzia.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("errore nella lettura dei dati");
         }
 
     }

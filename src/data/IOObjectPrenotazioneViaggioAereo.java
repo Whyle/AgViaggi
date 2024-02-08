@@ -6,10 +6,7 @@
 package data;
 import utils.DateTimeIT;
 
-import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import model.PrenotazioneAlloggioAppartamento;
 import model.PrenotazioneViaggioAereo;
 import model.TipoClasseMezzo;
 

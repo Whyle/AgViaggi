@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import static java.time.temporal.ChronoUnit.DAYS;
-import static java.time.temporal.ChronoUnit.HOURS;
 import static java.time.temporal.ChronoUnit.SECONDS;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -540,6 +539,8 @@ public class GestioneAgenzia {
         }
         // aggiungo una copia con il metodo add
         prenotazioniAlloggioHotel.add(pH.clone());
+
+        ioPAHotel.saveData(prenotazioniAlloggioHotel);
 
     }
 

@@ -138,25 +138,27 @@ public class LeggiConsole {
         Scanner scan = new Scanner(System.in);
         String valore;
         do {
+            System.out.print(messaggio);
             valore = scan.nextLine();
             if (valore.isEmpty()) {
-                System.out.println(messaggio);
+                System.out.println("Il campo non può essere vuoto");
             }
         } while (valore.isEmpty());
         return valore;
     }
 
+    // dd-MM-yyyy
     public static LocalDate getLocalDate(String messaggio, String messaggioErrore) {
         Scanner scan = new Scanner(System.in);
         System.out.print(messaggio);
         String valore;
         do {
             valore = scan.nextLine();
-            if (!valore.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            if (!valore.matches("\\d{2}-\\d{2}-\\d{4}")) {
                 System.out.println(messaggioErrore);
             }
-        } while (!valore.matches("\\d{4}-\\d{2}-\\d{2}"));
-        return LocalDate.parse(valore);
+        } while (!valore.matches("\\d{2}-\\d{2}-\\d{4}"));
+        return LocalDate.parse(valore, DateTimeIT.DATE);
     }
 
     public static boolean getYesNo(String messaggio, String messaggioErrore) {
@@ -195,7 +197,7 @@ public class LeggiConsole {
                 System.out.println(messaggioErrore);
             }
         } while (!valore.matches(formato));
-        return LocalDateTime.parse(valore);
+        return LocalDateTime.parse(valore, DateTimeIT.DATETIME);
     }
 
     public static LocalDateTime getLocalDateTimeAfter(String messaggio, String messaggioErrore, String formato, LocalDateTime dataInizio) {
@@ -208,6 +210,6 @@ public class LeggiConsole {
                 System.out.println(messaggioErrore);
             }
         } while (!valore.matches(formato) || LocalDateTime.parse(valore).isBefore(dataInizio));
-        return LocalDateTime.parse(valore);
+        return LocalDateTime.parse(valore, DateTimeIT.DATETIME);
     }
 }
