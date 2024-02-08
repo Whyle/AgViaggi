@@ -5,6 +5,8 @@
  */
 package utils;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import model.TipoAppartamento;
 import model.TipoCamera;
@@ -125,5 +127,87 @@ public class LeggiConsole {
             }
         } while (!EnumParser.checkStrutturaVillaggio(valore));
         return TipoStrutturaVillaggio.valueOf(valore);
+    }
+
+
+
+
+
+
+    public static String getStringNonVuota(String messaggio){
+        Scanner scan = new Scanner(System.in);
+        String valore;
+        do {
+            valore = scan.nextLine();
+            if (valore.isEmpty()) {
+                System.out.println(messaggio);
+            }
+        } while (valore.isEmpty());
+        return valore;
+    }
+
+    public static LocalDate getLocalDate(String messaggio, String messaggioErrore) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print(messaggio);
+        String valore;
+        do {
+            valore = scan.nextLine();
+            if (!valore.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                System.out.println(messaggioErrore);
+            }
+        } while (!valore.matches("\\d{4}-\\d{2}-\\d{2}"));
+        return LocalDate.parse(valore);
+    }
+
+    public static boolean getYesNo(String messaggio, String messaggioErrore) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print(messaggio);
+        String valore;
+        do {
+            valore = scan.nextLine();
+            if (!valore.equalsIgnoreCase("true") && !valore.equalsIgnoreCase("false")) {
+                System.out.println(messaggioErrore);
+            }
+        } while (!valore.equalsIgnoreCase("true") && !valore.equalsIgnoreCase("false"));
+        return valore.equalsIgnoreCase("true");
+    }
+
+    public static int getInt(String messaggio, String messaggioErrore) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print(messaggio);
+        String valore;
+        do {
+            valore = scan.nextLine();
+            if (!valore.matches("\\d+")) {
+                System.out.println(messaggioErrore);
+            }
+        } while (!valore.matches("\\d+"));
+        return Integer.parseInt(valore);
+    }
+
+    public static LocalDateTime getLocalDateTime(String messaggio, String messaggioErrore, String formato) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print(messaggio);
+        String valore;
+        do {
+            valore = scan.nextLine();
+            if (!valore.matches(formato)) {
+                System.out.println(messaggioErrore);
+            }
+        } while (!valore.matches(formato));
+        return LocalDateTime.parse(valore);
+    }
+
+    public static LocalDateTime getLocalDateTimeAfter(String messaggio, String messaggioErrore, String formato, LocalDateTime dataInizio) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print(messaggio);
+        String valore;
+        do {
+            valore = scan.nextLine();
+            if (!valore.matches(formato) || LocalDateTime.parse(valore).isBefore(dataInizio)) {
+                System.out.println(messaggioErrore);
+            }
+        } while (!valore.matches(formato) || LocalDateTime.parse(valore).isBefore(dataInizio));
+        return LocalDateTime.parse(valore);
     }
 }

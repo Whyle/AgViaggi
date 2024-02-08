@@ -4,13 +4,8 @@
  * and open the template in the editor.
  */
 package data;
-import dtformatters.DateTimeIT;
-import iofiles.IOObjectFile;
-import iofiles.ReadFile;
-import iofiles.WriteFile;
-import java.io.IOException;
+import utils.DateTimeIT;
 import java.time.LocalDate;
-import model.PrenotazioneAlloggioAppartamento;
 import model.PrenotazioneAlloggioVillaggio;
 import model.TipoStrutturaVillaggio;
 
