@@ -17,6 +17,18 @@ import logic.GestioneAgenzia;
  */
 public class AgViaggi {
 
+    public static void pressToContinue() {
+        System.out.println("Premi un tasto per continuare...");
+        try {
+            Scanner scan = new Scanner(System.in);
+            //System.out.flush(); 
+            System.in.read();
+            scan.nextLine();
+        } catch (IOException ex) {
+            Logger.getLogger(AgViaggi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public static void printMenu() {
         System.out.println("---------------------------------------------------");
         System.out.println("1. INSERISCI PRENOTAZIONE DI UN ALLOGGIO");
@@ -82,6 +94,7 @@ public class AgViaggi {
                                 default: /* DEFAULT */
                                     System.out.println("non valido"); break;
                             }
+                            break;
                         case "2": /* PRENOTAZIONE DI UN VIAGGIO */
                             System.out.println("di che tipologia di mezzo ti vuoi occupare?(1.TRENO 2.AEREO 3. AUTOBUS )");
                             
@@ -205,6 +218,8 @@ public class AgViaggi {
                     }
                     System.out.println("---------------------------------------------------");
                 }
+                
+                pressToContinue();
 
             } while (!s.equals("0"));
         } catch (IOException ex) {
