@@ -17,7 +17,7 @@ public class PrenotazioneAlloggioAppartamento extends PrenotazioneAlloggio<Preno
 
     protected TipoAppartamento tipoAppartamento;
     private final int codice ;
-    private static int nCodice = 0;//chiave
+    public static int nCodice = 0;//chiave
     private static int lastCodice;
     protected boolean cucina;
     protected boolean parcheggio;
@@ -27,7 +27,7 @@ public class PrenotazioneAlloggioAppartamento extends PrenotazioneAlloggio<Preno
             tipoAppartamento,  LocalDate dataInizioSoggiorno, LocalDate dataFineSoggiorno,boolean
                     cucina, boolean parcheggio, boolean animaliDomestici) {
         super(nomeCliente, dataInizioSoggiorno, dataFineSoggiorno);
-        this.codice = getCodice();
+        this.codice = generaNextCodice();
         this.tipoAppartamento = tipoAppartamento;
         this.cucina = cucina;
         this.parcheggio = parcheggio;
@@ -50,15 +50,16 @@ public static void setLastCodice(int lastCodice) {
     }
     @Override
     public int calcolaPrezzoSoggiorno() {
-        int prezzo = (int) DAYS.between(dataInizioSoggiorno, dataFineSoggiorno) * tipoAppartamento.costoPerNotte;
+        int prezzo=0;
+        prezzo += (int) DAYS.between(dataInizioSoggiorno, dataFineSoggiorno) * tipoAppartamento.costoPerNotte;
         if (this.cucina) {
-            prezzo += 60;
+            prezzo += 15*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
         }
         if (this.animaliDomestici) {
-            prezzo += 60;
+            prezzo += 10*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
         }
         if (this.parcheggio) {
-            prezzo += 60;
+            prezzo += 8*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
         }
         return prezzo;
     }
@@ -105,7 +106,7 @@ public static void setLastCodice(int lastCodice) {
         hash = 31 * hash + (this.animaliDomestici ? 1 : 0);
         return hash;
     }
-
+ 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -137,23 +138,24 @@ public static void setLastCodice(int lastCodice) {
     }
     @Override
     public String toString() {
-        String stringa= "PrenotazioneAlloggioAppartamento\n" + ", codice=" + codice +super.toString()+""
+        String stringa= "\nPrenotazioneAlloggioAppartamento\n" + "codice: " + this.codice +"\n"+super.toString()
                 + "\ntipologia appartamento: " + tipoAppartamento;
         if(!cucina&&!parcheggio&&!animaliDomestici){
             stringa+="\nla prenotazione non prevede costi aggiuntivi";
         }else{
-            System.out.println("la prenotazione prevede costi aggiuntivi: ");
+            stringa+="\nla prenotazione prevede costi aggiuntivi, ovvero: ";
             if(cucina){
-                stringa+="cucina";
+                stringa+="\ncucina";
             }
             if(animaliDomestici){
-                stringa+="animali domestici";
+                stringa+="\nanimali domestici";
             }
             if(parcheggio){
-                stringa+="parcheggio";
+                stringa+="\nparcheggio";
             }
         }
-        stringa+="Prezzo Soggiorno: "+calcolaPrezzoSoggiorno();
+        stringa+="\nPrezzo Soggiorno: "+calcolaPrezzoSoggiorno();
+        stringa+="\n---------------------------------\n";
         return stringa;
     }
      
@@ -162,9 +164,11 @@ public static void setLastCodice(int lastCodice) {
         // ordinamento per codice crescente
         return this.codice - pA.codice;
     }
+    
       @Override
     public PrenotazioneAlloggioAppartamento clone() throws CloneNotSupportedException {
         return (PrenotazioneAlloggioAppartamento) super.clone();
     }
+    
 
 }

@@ -1,1 +1,6 @@
-Emma;4;BUSINESS;Roma;05-05-2023 10:32;Modena;10-05-2023 15:49;TRUE;FALSE
+Anna;2;FIRST;Roma;05-05-2023 10:32;Modena;10-05-2023 15:49;true;false
+Franca;1;ECONOMY;Roma;11-07-2023 10:32;Modena;10-05-2023 15:49;true;true
+Mirko;3;ECONOMY;Roma;05-05-2023 10:32;Modena;10-05-2023 15:49;true;false
+Giuseppe;2;FIRST;Roma;05-05-2023 10:32;Modena;10-05-2023 15:49;true;false
+Antoine;1;BUSINESS;Roma;05-05-2023 10:32;Modena;10-05-2023 15:49;true;true
+Emma;1;BUSINESS;Roma;05-05-2023 10:32;Modena;10-05-2023 15:49;true;false

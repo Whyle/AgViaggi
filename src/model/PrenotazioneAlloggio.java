@@ -88,7 +88,7 @@ public String getNomeCliente() {
     }
 
     /**
-     *
+     *metodo astratto che ovverraiderà la classe figlia
      * @param object
      * @return
      */
@@ -97,11 +97,9 @@ public String getNomeCliente() {
 
     @Override
     public String toString() {
-        return "\n------------------------------------------"
-                + "\nNome Cliente: " + nomeCliente.toUpperCase()
+        return "\nNome Cliente: " + nomeCliente.toUpperCase()
                 + "\nData Inizio Soggiorno: " + DATE_FRMT.format(dataInizioSoggiorno)
-                + "\nData Fine Soggiorno: " + DATE_FRMT.format(dataFineSoggiorno)
-                + "\n------------------------------------------";
+                + "\nData Fine Soggiorno: " + DATE_FRMT.format(dataFineSoggiorno);
     }
     /////////////// clone /////////////
     @Override

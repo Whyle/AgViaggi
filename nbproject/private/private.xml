@@ -4,12 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/Users/yihao%20zhuo/Desktop/AgViaggi/AgViaggi/src/userinterface/TestAgenzia.java</file>
-            <file>file:/D:/Users/yihao%20zhuo/Desktop/AgViaggi/AgViaggi/src/data/IOObjectPrenotazioneViaggioAereo.java</file>
-            <file>file:/D:/Users/yihao%20zhuo/Desktop/AgViaggi/AgViaggi/src/data/IOObjectPrenotazioneAlloggioAppartamento.java</file>
-            <file>file:/D:/Users/yihao%20zhuo/Desktop/AgViaggi/AgViaggi/src/data/IOObjectPrenotazioneAlloggioHotel.java</file>
-            <file>file:/D:/Users/yihao%20zhuo/Desktop/AgViaggi/AgViaggi/src/logic/GestioneAgenzia.java</file>
-            <file>file:/D:/Users/yihao%20zhuo/Desktop/AgViaggi/AgViaggi/src/data/IOObjectPrenotazioneAlloggioCasaIndipendente.java</file>
-            <file>file:/D:/Users/yihao%20zhuo/Desktop/AgViaggi/AgViaggi/src/userinterface/AgViaggi.java</file>
+            <file>file:/D:/Users/yihao%20zhuo/Desktop/AgViaggi/AgViaggi/src/model/TipoClasseMezzo.java</file>
+            <file>file:/D:/Users/yihao%20zhuo/Desktop/AgViaggi/AgViaggi/src/model/PrenotazioneViaggioAutobus.java</file>
+            <file>file:/D:/Users/yihao%20zhuo/Desktop/AgViaggi/AgViaggi/src/model/PrenotazioneViaggio.java</file>
+            <file>file:/D:/Users/yihao%20zhuo/Desktop/AgViaggi/AgViaggi/src/userinterface/AgenzyViaggi.java</file>
         </group>
     </open-files>
 </project-private>

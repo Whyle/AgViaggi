@@ -62,8 +62,7 @@ public class GestioneAgenzia {
     private final int N_FIRST;
     private final int N_BUSINESS;
     private final int N_ECONOMY;
-    // in questo caso non servono nè la variabile che fissa la dimensione
-    // dell'array(N)
+    // in questo caso non servono nè la variabile che fissa la dimensione dell'array(N)
     // nè quella che tiene conto del numero di oggetti presenti nell'array (n)
     private IOObjectPrenotazioneAlloggioAppartamento ioPAAppartamento;
     private IOObjectPrenotazioneAlloggioCasaIndipendente ioPACasaIndipendente;
@@ -82,6 +81,7 @@ public class GestioneAgenzia {
         String fileTreno = fileName + "_prenotazioniTreno.txt";
         String fileAutobus = fileName + "_prenotazioniAutobus.txt";
         String fileAereo = fileName + "_prenotazioniAereo.txt";
+        
 
         ioPAAppartamento = new IOObjectPrenotazioneAlloggioAppartamento(fileAppartamenti, separator);
         ioPACasaIndipendente = new IOObjectPrenotazioneAlloggioCasaIndipendente(fileCaseIndipendenti, separator);
@@ -121,8 +121,7 @@ public class GestioneAgenzia {
         }
         PrenotazioneAlloggioAppartamento.setLastCodice(lastAppartamento);
 
-        ArrayList<PrenotazioneAlloggioCasaIndipendente> prenotazioniAlloggioCasaIndipendente = ioPACasaIndipendente
-                .loadData();
+        ArrayList<PrenotazioneAlloggioCasaIndipendente> prenotazioniAlloggioCasaIndipendente = ioPACasaIndipendente.loadData();
         int lastCasaIndipendente = 0;
         for (int i = 0; i < prenotazioniAlloggioCasaIndipendente.size(); i++) {
             if (prenotazioniAlloggioCasaIndipendente.get(i).getCodice() > lastCasaIndipendente) {
@@ -173,12 +172,16 @@ public class GestioneAgenzia {
             }
         }
         PrenotazioneViaggioTreno.setLastCodice(lastTreno);
+    PrenotazioneAlloggioAppartamento.nCodice=0;
+    PrenotazioneAlloggioCasaIndipendente.nCodice=0;
+            PrenotazioneViaggioTreno.nCodice=0;
+            PrenotazioneAlloggioVillaggio.nCodice=0;
+            PrenotazioneViaggioAereo.nCodice=0;
+            PrenotazioneViaggioAutobus.nCodice=0;
     }
 
-    public GestioneAgenzia(String nomeAgenzia, String separator, int nMonolocali, int nBilocali, int nTrilocali,
-            int nQuadrilocali, int nSingole, int nDoppie,
-            int nTriple, int nQuadruple, int nUnifamiliari, int nBifamiliari, int nASchiera, int nCamper, int nRoulotte,
-            int nBungalow, int nTende, int nFirst, int nBusiness, int nEconomy) throws IOException {
+    public GestioneAgenzia(String nomeAgenzia, String separator, int nMonolocali, int nBilocali, int nTrilocali, int nQuadrilocali, int nSingole, int nDoppie,
+            int nTriple, int nQuadruple, int nUnifamiliari, int nBifamiliari, int nASchiera, int nCamper, int nRoulotte, int nBungalow, int nTende, int nFirst, int nBusiness, int nEconomy) throws IOException {
         this.nomeAgenzia = nomeAgenzia;
         String fileName = nomeAgenzia + "_prenotazioni.txt";
         ioPAAppartamento = new IOObjectPrenotazioneAlloggioAppartamento(fileName, separator);
@@ -189,8 +192,7 @@ public class GestioneAgenzia {
         ioPVAutobus = new IOObjectPrenotazioneViaggioAutobus(fileName, separator);
         ioPVTreno = new IOObjectPrenotazioneViaggioTreno(fileName, separator);
         ArrayList<PrenotazioneAlloggioAppartamento> prenotazioniAlloggioAppartamento = ioPAAppartamento.loadData();
-        ArrayList<PrenotazioneAlloggioCasaIndipendente> prenotazioniAlloggioCasaIndipendente = ioPACasaIndipendente
-                .loadData();
+        ArrayList<PrenotazioneAlloggioCasaIndipendente> prenotazioniAlloggioCasaIndipendente = ioPACasaIndipendente.loadData();
         ArrayList<PrenotazioneAlloggioHotel> prenotazioniAlloggioHotel = ioPAHotel.loadData();
         ArrayList<PrenotazioneAlloggioVillaggio> prenotazioniAlloggioVillaggio = ioPAVillaggio.loadData();
         ArrayList<PrenotazioneViaggioAereo> prenotazioniViaggioAereo = ioPVAereo.loadData();
@@ -276,12 +278,10 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo che restituisce il numero di camere dell'albergo del tipo dato in
-     * input
+     * metodo che restituisce il numero di camere dell'albergo del tipo dato in input
      *
      * @param camera tipo di camera
-     * @return il numero di camere presenti nell'albergo di cui dispone l'agenzia
-     *         del tipo dato
+     * @return il numero di camere del tipo dato presenti nell'albergo di cui dispone l'agenzia 
      */
     public int getNCamere(TipoCamera camera) {
         int n = 0;
@@ -303,12 +303,10 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo che restituisce il numero di appartamenti dell'agenzia del tipo dato
-     * in input
+     * metodo che restituisce il numero di appartamenti dell'agenzia del tipo dato in input
      *
-     * @param appartamento
-     * @return il numero di appartamenti presenti di cui dispone l'agenzia del tipo
-     *         dato
+     * @param appartamento tipo di appartamento
+     * @return il numero di appartamenti del tipo dato presenti di cui dispone l'agenzia
      */
     public int getNAppartamenti(TipoAppartamento appartamento) {
         int n = 0;
@@ -330,12 +328,11 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo che restituisce il numero di strutture presenti nel villaggio
-     * dell'agenzia del tipo dato in input
-     * 
-     * @param strutturaVillaggio
-     * @return il numero di strutture presenti nel villaggio di cui dispone
-     *         l'agenzia del tipo dato
+     * metodo che restituisce il numero di strutture presenti nel villaggio dell'agenzia del tipo
+     * dato in input
+     *
+     * @param strutturaVillaggio tipo di struttura nel villaggio
+     * @return il numero di strutture presenti nel villaggio del tipo dato di cui dispone l'agenzia
      */
     public int getNStruttureVillaggio(TipoStrutturaVillaggio strutturaVillaggio) {
         int n = 0;
@@ -357,12 +354,10 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo che restituisce il numero di case indipendenti dell'albergo del tipo
-     * dato in input
+     * metodo che restituisce il numero di case indipendenti dell'albergo del tipo dato in input
      *
-     * @param casaIndipendente
-     * @return il numero di case indipendenti presenti di cui dispone l'agenzia del
-     *         tipo dato
+     * @param casaIndipendente tipo di casa indipendente
+     * @return il numero di case indipendenti del tipo dato presenti di cui dispone l'agenzia
      */
     public int getNCaseIndipendenti(TipoCasaIndipendente casaIndipendente) {
         int n = 0;
@@ -381,12 +376,12 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo che restituisce il numero di posti presenti nel mezzo di trasporto(che
-     * può essere treno, autobus o aereo) del tipo dato in input
-     * 
-     * @param classeMezzo
-     * @return il numero di posti presenti nel mezzo di trasporto(che può essere
-     *         treno, autobus o aereo) di cui dispone l'agenzia del tipo dato
+     * metodo che restituisce il numero di posti del tipo di classe dato in input presenti nel
+     * mezzo di trasporto(che può essere treno, autobus o aereo) 
+     *
+     * @param classeMezzo tipo di classe
+     * @return il numero di posti presenti nel mezzo di trasporto(che può essere treno, autobus o
+     * aereo) di cui dispone l'agenzia del tipo dato
      */
     public int getNClasseMezzi(TipoClasseMezzo classeMezzo) {
         int n = 0;
@@ -403,13 +398,19 @@ public class GestioneAgenzia {
         }
         return n;
     }
-
+/**
+ * metodo che verifica la disponibilità del tipo di camera dell'albergo, preso in input, nella data
+ * selezionata
+ * @param tipoCamera tipo di camera
+ * @param data data in cui verificare la disponibilità
+ * @return true se il tipo di camera preso in input in quella data è disponibile o false se non lo è
+ * @throws IOException 
+ */
     public boolean verificaDisponibilitaHotel(TipoCamera tipoCamera, LocalDate data) throws IOException {
         int camereOccupate = 0;
         ArrayList<PrenotazioneAlloggioHotel> prenotazioniAlloggioHotel = ioPAHotel.loadData();
         for (int i = 0; i < prenotazioniAlloggioHotel.size(); i++) {
-            if ((prenotazioniAlloggioHotel.get(i).getDataInizioSoggiorno().isBefore(data)
-                    || prenotazioniAlloggioHotel.get(i).getDataInizioSoggiorno().equals(data))
+            if ((prenotazioniAlloggioHotel.get(i).getDataInizioSoggiorno().isBefore(data) || prenotazioniAlloggioHotel.get(i).getDataInizioSoggiorno().equals(data))
                     && prenotazioniAlloggioHotel.get(i).getDataFineSoggiorno().isAfter(data)
                     && prenotazioniAlloggioHotel.get(i).getTipoCamera() == tipoCamera) {
                 camereOccupate++;
@@ -417,14 +418,19 @@ public class GestioneAgenzia {
         }
         return camereOccupate < getNCamere(tipoCamera);
     }
-
-    public boolean verificaDisponibilitaAppartamento(TipoAppartamento tipoAppartamento, LocalDate data)
-            throws IOException {
+/**
+ * metodo che verifica la disponibilità del tipo di appartamento, preso in input, nella data
+ * selezionata 
+ * @param tipoAppartamento tipo di appartamento
+ * @param data data in cui verificare la disponibilità
+ * @return true se il tipo di appartamento preso in input in quella data è disponibile o false se non lo è
+ * @throws IOException 
+ */
+    public boolean verificaDisponibilitaAppartamento(TipoAppartamento tipoAppartamento, LocalDate data) throws IOException {
         int appartamentiOccupati = 0;
         ArrayList<PrenotazioneAlloggioAppartamento> prenotazioniAlloggioAppartamento = ioPAAppartamento.loadData();
         for (int i = 0; i < prenotazioniAlloggioAppartamento.size(); i++) {
-            if ((prenotazioniAlloggioAppartamento.get(i).getDataInizioSoggiorno().isBefore(data)
-                    || prenotazioniAlloggioAppartamento.get(i).getDataInizioSoggiorno().equals(data))
+            if ((prenotazioniAlloggioAppartamento.get(i).getDataInizioSoggiorno().isBefore(data) || prenotazioniAlloggioAppartamento.get(i).getDataInizioSoggiorno().equals(data))
                     && prenotazioniAlloggioAppartamento.get(i).getDataFineSoggiorno().isAfter(data)
                     && prenotazioniAlloggioAppartamento.get(i).getTipoAppartamento() == tipoAppartamento) {
                 appartamentiOccupati++;
@@ -432,15 +438,19 @@ public class GestioneAgenzia {
         }
         return appartamentiOccupati < getNAppartamenti(tipoAppartamento);
     }
-
-    public boolean verificaDisponibilitaCasaIndipendente(TipoCasaIndipendente tipoCasaIndipendente, LocalDate data)
-            throws IOException {
+/**
+ * metodo che verifica la disponibilità del tipo di casa indipendente, preso in input, nella data
+ * selezionata 
+ * @param tipoCasaIndipendente tipo di casa indipendente
+ * @param data data in cui verificare la disponibilità
+ * @return true se il tipo di casa indipendente preso in input in quella data è disponibile o false se non lo è
+ * @throws IOException 
+ */
+    public boolean verificaDisponibilitaCasaIndipendente(TipoCasaIndipendente tipoCasaIndipendente, LocalDate data) throws IOException {
         int caseIndipendentiOccupate = 0;
-        ArrayList<PrenotazioneAlloggioCasaIndipendente> prenotazioniAlloggioCasaIndipendente = ioPACasaIndipendente
-                .loadData();
+        ArrayList<PrenotazioneAlloggioCasaIndipendente> prenotazioniAlloggioCasaIndipendente = ioPACasaIndipendente.loadData();
         for (int i = 0; i < prenotazioniAlloggioCasaIndipendente.size(); i++) {
-            if ((prenotazioniAlloggioCasaIndipendente.get(i).getDataInizioSoggiorno().isBefore(data)
-                    || prenotazioniAlloggioCasaIndipendente.get(i).getDataInizioSoggiorno().equals(data))
+            if ((prenotazioniAlloggioCasaIndipendente.get(i).getDataInizioSoggiorno().isBefore(data) || prenotazioniAlloggioCasaIndipendente.get(i).getDataInizioSoggiorno().equals(data))
                     && prenotazioniAlloggioCasaIndipendente.get(i).getDataFineSoggiorno().isAfter(data)
                     && prenotazioniAlloggioCasaIndipendente.get(i).getTipoCasaIndipendente() == tipoCasaIndipendente) {
                 caseIndipendentiOccupate++;
@@ -448,14 +458,20 @@ public class GestioneAgenzia {
         }
         return caseIndipendentiOccupate < getNCaseIndipendenti(tipoCasaIndipendente);
     }
-
-    public boolean verificaDisponibilitaStrutturaVillaggio(TipoStrutturaVillaggio tipoStrutturaVillaggio,
-            LocalDate data) throws IOException {
+/**
+ *metodo che verifica la disponibilità del tipo di struttura nel villaggio, preso in input, nella 
+ * data selezionata 
+ * @param tipoStrutturaVillaggio tipo di struttura nel villaggio
+ * @param data data in cui verificare la disponibilità
+ * @return true se il tipo di struttura nel villaggio preso in input in quella data è disponibile 
+ * o false se non lo è
+ * @throws IOException 
+ */
+    public boolean verificaDisponibilitaStrutturaVillaggio(TipoStrutturaVillaggio tipoStrutturaVillaggio, LocalDate data) throws IOException {
         int struttureVillaggioOccupate = 0;
         ArrayList<PrenotazioneAlloggioVillaggio> prenotazioniAlloggioVillaggio = ioPAVillaggio.loadData();
         for (int i = 0; i < prenotazioniAlloggioVillaggio.size(); i++) {
-            if ((prenotazioniAlloggioVillaggio.get(i).getDataInizioSoggiorno().isBefore(data)
-                    || prenotazioniAlloggioVillaggio.get(i).getDataInizioSoggiorno().equals(data))
+            if ((prenotazioniAlloggioVillaggio.get(i).getDataInizioSoggiorno().isBefore(data) || prenotazioniAlloggioVillaggio.get(i).getDataInizioSoggiorno().equals(data))
                     && prenotazioniAlloggioVillaggio.get(i).getDataFineSoggiorno().isAfter(data)
                     && prenotazioniAlloggioVillaggio.get(i).getTipoStrutturaVillaggio() == tipoStrutturaVillaggio) {
                 struttureVillaggioOccupate++;
@@ -463,63 +479,90 @@ public class GestioneAgenzia {
         }
         return struttureVillaggioOccupate < getNStruttureVillaggio(tipoStrutturaVillaggio);
     }
-
-    ///////////////////// AGGIUNGI ROBA
-    public boolean verificaDisponibilitaAereo(TipoClasseMezzo tipoClasseMezzo, LocalDateTime data) throws IOException {
+  /**
+     *metodo che verifica la disponibilità di posti disponibili del tipo di classe dell'aereo
+ * nella data selezionata  
+     * @param tipoClasseMezzo tipo di classe del mezzo
+     * @param data data in cui verificare la disponibilità
+     * @param luogoPartenza luogo di partenza
+     * @param luogoArrivo luogo di arrivo
+     * @return true se ci sono posti del tipo di classe preso in input in quella data è disponibile 
+ * o false se non lo è
+     * @throws IOException 
+     */
+    public boolean verificaDisponibilitaAereo(TipoClasseMezzo tipoClasseMezzo, LocalDateTime data, String luogoPartenza,String luogoArrivo) throws IOException {
         int postiClasseOccupati = 0;
         ArrayList<PrenotazioneViaggioAereo> prenotazioniViaggioAereo = ioPVAereo.loadData();
         for (int i = 0; i < prenotazioniViaggioAereo.size(); i++) {
-            if ((prenotazioniViaggioAereo.get(i).getDataPartenza().isBefore(data)
-                    || prenotazioniViaggioAereo.get(i).getDataPartenza().equals(data))
-                    && prenotazioniViaggioAereo.get(i).getDataArrivo().isAfter(data)
+            if ((prenotazioniViaggioAereo.get(i).getDataPartenza().isBefore(data) || prenotazioniViaggioAereo.get(i).getDataPartenza().equals(data))
+                    && prenotazioniViaggioAereo.get(i).getDataArrivo().isAfter(data)&&prenotazioniViaggioAereo.get(i).getLuogoPartenza().equals(luogoPartenza)
+                    &&prenotazioniViaggioAereo.get(i).getLuogoArrivo().equals(luogoArrivo)
                     && prenotazioniViaggioAereo.get(i).getTipoClasseMezzo() == tipoClasseMezzo) {
                 postiClasseOccupati++;
             }
         }
         return postiClasseOccupati < getNClasseMezzi(tipoClasseMezzo);
     }
-
-    public boolean verificaDisponibilitaTreno(TipoClasseMezzo tipoClasseMezzo, LocalDateTime data) throws IOException {
+/**
+ *metodo che verifica la disponibilità di posti disponibili del tipo di classe del treno
+ * nella data selezionata 
+ * @param tipoClasseMezzo tipo di classe del mezzo
+ * @param data data in cui verificare la disponibilità
+  * @param luogoPartenza luogo di partenza
+     * @param luogoArrivo luogo di arrivo
+ * @return true se ci sono posti del tipo di classe preso in input in quella data è disponibile 
+ * o false se non lo è
+ * @throws IOException 
+ */
+    public boolean verificaDisponibilitaTreno(TipoClasseMezzo tipoClasseMezzo, LocalDateTime data, String luogoPartenza,String luogoArrivo) throws IOException {
+        int postiClasseOccupati = 0;
+        ArrayList<PrenotazioneViaggioTreno>prenotazioniViaggioTreno = ioPVTreno.loadData();
+        for (int i = 0; i < prenotazioniViaggioTreno.size(); i++) {
+            if ((prenotazioniViaggioTreno.get(i).getDataPartenza().isBefore(data) || prenotazioniViaggioTreno.get(i).getDataPartenza().equals(data))
+                    && prenotazioniViaggioTreno.get(i).getDataArrivo().isAfter(data)
+                    &&prenotazioniViaggioTreno.get(i).getLuogoPartenza().equals(luogoPartenza)
+                    &&prenotazioniViaggioTreno.get(i).getLuogoArrivo().equals(luogoArrivo)
+                    &&  prenotazioniViaggioTreno.get(i).getTipoClasseMezzo() == tipoClasseMezzo) {
+                postiClasseOccupati++;
+            }
+        }
+        return postiClasseOccupati < getNClasseMezzi(tipoClasseMezzo);
+    }
+/**
+ *metodo che verifica la disponibilità di posti disponibili del tipo di classe dell'autobus
+ * nella data selezionata  
+ * @param tipoClasseMezzo tipo di classe del mezzo
+ * @param data data in cui verificare la disponibilità
+ * @param luogoPartenza luogo di partenza
+     * @param luogoArrivo luogo di arrivo
+ * @return true se ci sono posti del tipo di classe preso in input in quella data è disponibile 
+ * o false se non lo è
+ * @throws IOException 
+ */
+    public boolean verificaDisponibilitaAutobus(TipoClasseMezzo tipoClasseMezzo, LocalDateTime data, String luogoPartenza,String luogoArrivo) throws IOException {
         int postiClasseOccupati = 0;
         ArrayList<PrenotazioneViaggioAutobus> prenotazioniViaggioAutobus = ioPVAutobus.loadData();
         for (int i = 0; i < prenotazioniViaggioAutobus.size(); i++) {
-            if ((prenotazioniViaggioAutobus.get(i).getDataPartenza().isBefore(data)
-                    || prenotazioniViaggioAutobus.get(i).getDataPartenza().equals(data))
-                    && prenotazioniViaggioAutobus.get(i).getDataArrivo().isAfter(data)
-                    && prenotazioniViaggioAutobus.get(i).getTipoClasseMezzo() == tipoClasseMezzo) {
+            if ((prenotazioniViaggioAutobus.get(i).getDataPartenza().isBefore(data) || prenotazioniViaggioAutobus.get(i).getDataPartenza().equals(data))
+                    && prenotazioniViaggioAutobus.get(i).getDataArrivo().isAfter(data)&&prenotazioniViaggioAutobus.get(i).getLuogoPartenza().equals(luogoPartenza)
+                    &&prenotazioniViaggioAutobus.get(i).getLuogoArrivo().equals(luogoArrivo)
+                    &&prenotazioniViaggioAutobus.get(i).getTipoClasseMezzo() == tipoClasseMezzo) {
                 postiClasseOccupati++;
             }
         }
         return postiClasseOccupati < getNClasseMezzi(tipoClasseMezzo);
     }
 
-    public boolean verificaDisponibilitaAutobus(TipoClasseMezzo tipoClasseMezzo, LocalDateTime data)
-            throws IOException {
-        int postiClasseOccupati = 0;
-        ArrayList<PrenotazioneViaggioAutobus> prenotazioniViaggioAutobus = ioPVAutobus.loadData();
-        for (int i = 0; i < prenotazioniViaggioAutobus.size(); i++) {
-            if ((prenotazioniViaggioAutobus.get(i).getDataPartenza().isBefore(data)
-                    || prenotazioniViaggioAutobus.get(i).getDataPartenza().equals(data))
-                    && prenotazioniViaggioAutobus.get(i).getDataArrivo().isAfter(data)
-                    && prenotazioniViaggioAutobus.get(i).getTipoClasseMezzo() == tipoClasseMezzo) {
-                postiClasseOccupati++;
-            }
-        }
-        return postiClasseOccupati < getNClasseMezzi(tipoClasseMezzo);
-    }
 
     /**
-     * metodo ADD che aggiunge una prenotazione all'albergo come copia
-     * dell'oggetto fornito
-     * 
-     * @param pH oggetto prenotazione da aggiungere
+     * metodo ADD che aggiunge una prenotazione all'albergo come copia dell'oggetto fornito
+     *
+     * @param pH oggetto prenotazione camera d'hotel da aggiungere
      * @throws AgenziaException
      * @throws IOException
      * @throws CloneNotSupportedException
      */
-
-    public void addPrenotazioneAlloggioHotel(PrenotazioneAlloggioHotel pH)
-            throws AgenziaException, IOException, CloneNotSupportedException {
+    public void addPrenotazioneAlloggioHotel(PrenotazioneAlloggioHotel pH) throws AgenziaException, IOException, CloneNotSupportedException {
         ArrayList<PrenotazioneAlloggioHotel> prenotazioniAlloggioHotel = ioPAHotel.loadData();
         // verifico che le date siano in ordine cronologico corretto
         if (pH.getDataInizioSoggiorno().isAfter(pH.getDataFineSoggiorno())) {
@@ -529,8 +572,7 @@ public class GestioneAgenzia {
         if (prenotazioniAlloggioHotel.contains(pH)) {
             throw new PrenotazioneGiaInserita();
         }
-        // verifico che in tutte le giornate della prenotazione ci sia una camera
-        // disponibile
+        // verifico che in tutte le giornate della prenotazione ci sia una camera disponibile
         int giorni_prenotazione = (int) DAYS.between(pH.getDataInizioSoggiorno(), pH.getDataFineSoggiorno());
         for (int g = 0; g < giorni_prenotazione; g++) {
             if (!verificaDisponibilitaHotel(pH.getTipoCamera(), pH.getDataInizioSoggiorno().plusDays(g))) {
@@ -539,22 +581,18 @@ public class GestioneAgenzia {
         }
         // aggiungo una copia con il metodo add
         prenotazioniAlloggioHotel.add(pH.clone());
-
         ioPAHotel.saveData(prenotazioniAlloggioHotel);
-
     }
 
     /**
-     * metodo ADD che aggiunge una prenotazione all'appartamento come copia
-     * dell'oggetto fornito
-     * 
-     * @param pA oggetto prenotazione da aggiungere
+     * metodo ADD che aggiunge una prenotazione all'appartamento come copia dell'oggetto fornito
+     *
+     * @param pA oggetto prenotazione appartamento da aggiungere
      * @throws AgenziaException
      * @throws IOException
      * @throws CloneNotSupportedException
      */
-    public void addPrenotazioneAlloggioAppartamento(PrenotazioneAlloggioAppartamento pA)
-            throws AgenziaException, IOException, CloneNotSupportedException {
+    public void addPrenotazioneAlloggioAppartamento(PrenotazioneAlloggioAppartamento pA) throws AgenziaException, IOException, CloneNotSupportedException {
         ArrayList<PrenotazioneAlloggioAppartamento> prenotazioniAlloggioAppartamento = ioPAAppartamento.loadData();
         // verifico che le date siano in ordine cronologico corretto
         if (pA.getDataInizioSoggiorno().isAfter(pA.getDataFineSoggiorno())) {
@@ -564,8 +602,7 @@ public class GestioneAgenzia {
         if (prenotazioniAlloggioAppartamento.contains(pA)) {
             throw new PrenotazioneGiaInserita();
         }
-        // verifico che in tutte le giornate della prenotazione ci sia una camera
-        // disponibile
+        // verifico che in tutte le giornate della prenotazione ci sia un appartamento disponibile
         int giorni_prenotazione = (int) DAYS.between(pA.getDataInizioSoggiorno(), pA.getDataFineSoggiorno());
         for (int g = 0; g < giorni_prenotazione; g++) {
             if (!verificaDisponibilitaAppartamento(pA.getTipoAppartamento(), pA.getDataInizioSoggiorno().plusDays(g))) {
@@ -574,22 +611,21 @@ public class GestioneAgenzia {
         }
         // aggiungo una copia con il metodo add
         prenotazioniAlloggioAppartamento.add(pA.clone());
+        ioPAAppartamento.saveData(prenotazioniAlloggioAppartamento);
 
     }
 
     /**
-     * metodo ADD che aggiunge una prenotazione alla casa indipendente come copia
-     * dell'oggetto fornito
-     * 
-     * @param pC oggetto prenotazione da aggiungere
+     * metodo ADD che aggiunge una prenotazione alla casa indipendente come copia dell'oggetto
+     * fornito
+     *
+     * @param pC oggetto prenotazione casa indipendente da aggiungere
      * @throws AgenziaException
      * @throws IOException
      * @throws CloneNotSupportedException
      */
-    public void addPrenotazioneAlloggioCasaIndipendente(PrenotazioneAlloggioCasaIndipendente pC)
-            throws AgenziaException, IOException, CloneNotSupportedException {
-        ArrayList<PrenotazioneAlloggioCasaIndipendente> prenotazioniAlloggioCasaIndipendente = ioPACasaIndipendente
-                .loadData();
+    public void addPrenotazioneAlloggioCasaIndipendente(PrenotazioneAlloggioCasaIndipendente pC) throws AgenziaException, IOException, CloneNotSupportedException {
+        ArrayList<PrenotazioneAlloggioCasaIndipendente> prenotazioniAlloggioCasaIndipendente = ioPACasaIndipendente.loadData();
         // verifico che le d ate siano in ordine cronologico corretto
         if (pC.getDataInizioSoggiorno().isAfter(pC.getDataFineSoggiorno())) {
             throw new RangeDataNonValido(pC.getDataInizioSoggiorno(), pC.getDataFineSoggiorno());
@@ -598,31 +634,28 @@ public class GestioneAgenzia {
         if (prenotazioniAlloggioCasaIndipendente.contains(pC)) {
             throw new PrenotazioneGiaInserita();
         }
-        // verifico che in tutte le giornate della prenotazione ci sia una camera
-        // disponibile
+        // verifico che in tutte le giornate della prenotazione ci sia una casa indipendente disponibile
         int giorni_prenotazione = (int) DAYS.between(pC.getDataInizioSoggiorno(), pC.getDataFineSoggiorno());
         for (int g = 0; g < giorni_prenotazione; g++) {
-            if (!verificaDisponibilitaCasaIndipendente(pC.getTipoCasaIndipendente(),
-                    pC.getDataInizioSoggiorno().plusDays(g))) {
+            if (!verificaDisponibilitaCasaIndipendente(pC.getTipoCasaIndipendente(), pC.getDataInizioSoggiorno().plusDays(g))) {
                 throw new CasaIndipendenteNonDisponibile(pC.getTipoCasaIndipendente());
             }
         }
         // aggiungo una copia con il metodo add
         prenotazioniAlloggioCasaIndipendente.add(pC.clone());
+        ioPACasaIndipendente.saveData(prenotazioniAlloggioCasaIndipendente);
 
     }
 
     /**
-     * metodo ADD che aggiunge una prenotazione al villaggio come copia
-     * dell'oggetto fornito
-     * 
-     * @param pV oggetto prenotazione da aggiungere
+     * metodo ADD che aggiunge una prenotazione al villaggio come copia dell'oggetto fornito
+     *
+     * @param pV oggetto prenotazione struttura villaggio da aggiungere
      * @throws AgenziaException
      * @throws IOException
      * @throws CloneNotSupportedException
      */
-    public void addPrenotazioneAlloggioVillaggio(PrenotazioneAlloggioVillaggio pV)
-            throws AgenziaException, IOException, CloneNotSupportedException {
+    public void addPrenotazioneAlloggioVillaggio(PrenotazioneAlloggioVillaggio pV) throws AgenziaException, IOException, CloneNotSupportedException {
         ArrayList<PrenotazioneAlloggioVillaggio> prenotazioniAlloggioVillaggio = ioPAVillaggio.loadData();
         // verifico che le date siano in ordine cronologico corretto
         if (pV.getDataInizioSoggiorno().isAfter(pV.getDataFineSoggiorno())) {
@@ -632,31 +665,28 @@ public class GestioneAgenzia {
         if (prenotazioniAlloggioVillaggio.contains(pV)) {
             throw new PrenotazioneGiaInserita();
         }
-        // verifico che in tutte le giornate della prenotazione ci sia una camera
-        // disponibile
+        // verifico che in tutte le giornate della prenotazione ci sia una strutture del villaggio disponibile
         int giorni_prenotazione = (int) DAYS.between(pV.getDataInizioSoggiorno(), pV.getDataFineSoggiorno());
         for (int g = 0; g < giorni_prenotazione; g++) {
-            if (!verificaDisponibilitaStrutturaVillaggio(pV.getTipoStrutturaVillaggio(),
-                    pV.getDataInizioSoggiorno().plusDays(g))) {
+            if (!verificaDisponibilitaStrutturaVillaggio(pV.getTipoStrutturaVillaggio(), pV.getDataInizioSoggiorno().plusDays(g))) {
                 throw new StrutturaVillaggioNonDisponibile(pV.getTipoStrutturaVillaggio());
             }
         }
         // aggiungo una copia con il metodo add
         prenotazioniAlloggioVillaggio.add(pV.clone());
+        ioPAVillaggio.saveData(prenotazioniAlloggioVillaggio);
 
     }
 
-    /**
-     * metodo ADD che aggiunge una prenotazione all'aereo come copia
-     * dell'oggetto fornito
-     * 
-     * @param pA oggetto prenotazione da aggiungere
+     /**
+     * metodo ADD che aggiunge una prenotazione all'aereo come copia dell'oggetto fornito
+     *
+     * @param pA oggetto prenotazione aereo da aggiungere
      * @throws AgenziaException
      * @throws IOException
      * @throws CloneNotSupportedException
      */
-    public void addPrenotazioneViaggioAereo(PrenotazioneViaggioAereo pA)
-            throws AgenziaException, IOException, CloneNotSupportedException {
+    public void addPrenotazioneViaggioAereo(PrenotazioneViaggioAereo pA) throws AgenziaException, IOException, CloneNotSupportedException {
         ArrayList<PrenotazioneViaggioAereo> prenotazioniViaggioAereo = ioPVAereo.loadData();
         // verifico che gli orari siano in ordine cronologico corretto
         if (pA.getDataPartenza().isAfter(pA.getDataArrivo())) {
@@ -666,30 +696,28 @@ public class GestioneAgenzia {
         if (prenotazioniViaggioAereo.contains(pA)) {
             throw new PrenotazioneGiaInserita();
         }
-        // verifico che in tutto il tempo della prenotazione del viaggio ci sia un posto
-        // disponibile
+        // verifico che in tutto il tempo della prenotazione del viaggio ci sia un posto disponibile
         int secondi_viaggio = (int) SECONDS.between(pA.getDataPartenza(), pA.getDataArrivo());
         for (int s = 0; s < secondi_viaggio; s++) {
-            if (!verificaDisponibilitaAereo(pA.getTipoClasseMezzo(), pA.getDataPartenza().plusSeconds(s))) {
+            if (!verificaDisponibilitaAereo(pA.getTipoClasseMezzo(), pA.getDataPartenza().plusSeconds(s),pA.getLuogoPartenza(),pA.getLuogoArrivo())) {
                 throw new ClasseMezzoNonDisponibile(pA.getTipoClasseMezzo());
             }
         }
         // aggiungo una copia con il metodo add
         prenotazioniViaggioAereo.add(pA.clone());
+        ioPVAereo.saveData(prenotazioniViaggioAereo);
 
     }
 
     /**
-     * metodo ADD che aggiunge una prenotazione all'autobus come copia
-     * dell'oggetto fornito
-     * 
-     * @param pA oggetto prenotazione da aggiungere
+     * metodo ADD che aggiunge una prenotazione all'autobus come copia dell'oggetto fornito
+     *
+     * @param pA oggetto prenotazione autobus da aggiungere
      * @throws AgenziaException
      * @throws IOException
      * @throws CloneNotSupportedException
      */
-    public void addPrenotazioneViaggioAutobus(PrenotazioneViaggioAutobus pA)
-            throws AgenziaException, IOException, CloneNotSupportedException {
+    public void addPrenotazioneViaggioAutobus(PrenotazioneViaggioAutobus pA) throws AgenziaException, IOException, CloneNotSupportedException {
         ArrayList<PrenotazioneViaggioAutobus> prenotazioniViaggioAutobus = ioPVAutobus.loadData();
         // verifico che le date siano in ordine cronologico corretto
         if (pA.getDataPartenza().isAfter(pA.getDataArrivo())) {
@@ -699,30 +727,28 @@ public class GestioneAgenzia {
         if (prenotazioniViaggioAutobus.contains(pA)) {
             throw new PrenotazioneGiaInserita();
         }
-        // verifico che in tutto il tempo della prenotazione del viaggio ci sia un posto
-        // disponibile
+        // verifico che in tutto il tempo della prenotazione del viaggio ci sia un posto disponibile
         int secondi_viaggio = (int) SECONDS.between(pA.getDataPartenza(), pA.getDataArrivo());
         for (int s = 0; s < secondi_viaggio; s++) {
-            if (!verificaDisponibilitaAereo(pA.getTipoClasseMezzo(), pA.getDataPartenza().plusSeconds(s))) {
+            if (!verificaDisponibilitaAereo(pA.getTipoClasseMezzo(), pA.getDataPartenza().plusSeconds(s),pA.getLuogoPartenza(),pA.getLuogoArrivo())) {
                 throw new ClasseMezzoNonDisponibile(pA.getTipoClasseMezzo());
             }
         }
         // aggiungo una copia con il metodo add
         prenotazioniViaggioAutobus.add(pA.clone());
+        ioPVAutobus.saveData(prenotazioniViaggioAutobus);
 
     }
 
     /**
-     * metodo ADD che aggiunge una prenotazione al treno come copia
-     * dell'oggetto fornito
-     * 
-     * @param pT oggetto prenotazione da aggiungere
+     * metodo ADD che aggiunge una prenotazione al treno come copia dell'oggetto fornito
+     *
+     * @param pT oggetto prenotazione treno da aggiungere
      * @throws AgenziaException
      * @throws IOException
      * @throws CloneNotSupportedException
      */
-    public void addPrenotazioneViaggioTreno(PrenotazioneViaggioTreno pT)
-            throws AgenziaException, IOException, CloneNotSupportedException {
+    public void addPrenotazioneViaggioTreno(PrenotazioneViaggioTreno pT) throws AgenziaException, IOException, CloneNotSupportedException {
         ArrayList<PrenotazioneViaggioTreno> prenotazioniViaggioTreno = ioPVTreno.loadData();
         // verifico che le date siano in ordine cronologico corretto
         if (pT.getDataPartenza().isAfter(pT.getDataArrivo())) {
@@ -732,21 +758,21 @@ public class GestioneAgenzia {
         if (prenotazioniViaggioTreno.contains(pT)) {
             throw new PrenotazioneGiaInserita();
         }
-        // verifico che in tutto il tempo della prenotazione del viaggio ci sia un posto
-        // disponibile
+        // verifico che in tutto il tempo della prenotazione del viaggio ci sia un posto disponibile
         int secondi_viaggio = (int) SECONDS.between(pT.getDataPartenza(), pT.getDataArrivo());
         for (int s = 0; s < secondi_viaggio; s++) {
-            if (!verificaDisponibilitaAereo(pT.getTipoClasseMezzo(), pT.getDataPartenza().plusSeconds(s))) {
+            if (!verificaDisponibilitaAereo(pT.getTipoClasseMezzo(), pT.getDataPartenza().plusSeconds(s),pT.getLuogoPartenza(),pT.getLuogoArrivo())) {
                 throw new ClasseMezzoNonDisponibile(pT.getTipoClasseMezzo());
             }
         }
         // aggiungo una copia con il metodo add
         prenotazioniViaggioTreno.add(pT.clone());
+        ioPVTreno.saveData(prenotazioniViaggioTreno);
 
     }
 
     /**
-     * metodo REMOVE che elimina una prenotazione fornendo il numero di codice
+     * metodo REMOVE che elimina una prenotazione di una camera d'hotel fornendo il numero di codice
      *
      * @param codice univoco che identifica la prenotazione
      * @throws AgenziaException
@@ -754,16 +780,16 @@ public class GestioneAgenzia {
      */
     public void removePrenotazioneAlloggioHotel(int codice) throws AgenziaException, IOException {
         int line_prenotazione = getLinePrenotazioneAlloggioHotel(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
         ioPAHotel.remove(line_prenotazione);
 
+
     }
 
     /**
-     * metodo REMOVE che elimina una prenotazione fornendo il numero di codice
+     * metodo REMOVE che elimina una prenotazione di un appartamento fornendo il numero di codice
      *
      * @param codice univoco che identifica la prenotazione
      * @throws AgenziaException
@@ -771,7 +797,6 @@ public class GestioneAgenzia {
      */
     public void removePrenotazioneAlloggioAppartamento(int codice) throws AgenziaException, IOException {
         int line_prenotazione = getLinePrenotazioneAlloggioAppartamento(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -780,7 +805,7 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo REMOVE che elimina una prenotazione fornendo il numero di codice
+     * metodo REMOVE che elimina una prenotazione di una casa indipendente fornendo il numero di codice
      *
      * @param codice univoco che identifica la prenotazione
      * @throws AgenziaException
@@ -788,7 +813,6 @@ public class GestioneAgenzia {
      */
     public void removePrenotazioneAlloggioCasaIndipendente(int codice) throws AgenziaException, IOException {
         int line_prenotazione = getLinePrenotazioneAlloggioCasaIndipendente(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -797,7 +821,7 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo REMOVE che elimina una prenotazione fornendo il numero di codice
+     * metodo REMOVE che elimina una prenotazione di una struttura del villaggio fornendo il numero di codice
      *
      * @param codice univoco che identifica la prenotazione
      * @throws AgenziaException
@@ -805,7 +829,6 @@ public class GestioneAgenzia {
      */
     public void removePrenotazioneAlloggioVillaggio(int codice) throws AgenziaException, IOException {
         int line_prenotazione = getLinePrenotazioneAlloggioVillaggio(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -814,15 +837,14 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo REMOVE che elimina una prenotazione fornendo il numero di codice
-     * 
+     * metodo REMOVE che elimina una prenotazione di posti sull'aereo fornendo il numero di codice
+     *
      * @param codice univoco che identifica la prenotazione
      * @throws AgenziaException
      * @throws IOException
      */
     public void removePrenotazioneViaggioAereo(int codice) throws AgenziaException, IOException {
         int line_prenotazione = getLinePrenotazioneViaggioAereo(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -831,7 +853,7 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo REMOVE che elimina una prenotazione fornendo il numero di codice
+     * metodo REMOVE che elimina una prenotazione di posti sull'autobus fornendo il numero di codice
      *
      * @param codice univoco che identifica la prenotazione
      * @throws AgenziaException
@@ -839,7 +861,6 @@ public class GestioneAgenzia {
      */
     public void removePrenotazioneViaggioAutobus(int codice) throws AgenziaException, IOException {
         int line_prenotazione = getLinePrenotazioneViaggioAutobus(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -848,7 +869,7 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo REMOVE che elimina una prenotazione fornendo il numero di codice
+     * metodo REMOVE che elimina una prenotazione di posti sul treno fornendo il numero di codice
      *
      * @param codice univoco che identifica la prenotazione
      * @throws AgenziaException
@@ -856,18 +877,17 @@ public class GestioneAgenzia {
      */
     public void removePrenotazioneViaggioTreno(int codice) throws AgenziaException, IOException {
         int line_prenotazione = getLinePrenotazioneViaggioTreno(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
         ioPVTreno.remove(line_prenotazione);
 
     }
+    
 
     /**
-     * metodo GET prenotazione che restituisce una prenotazione fornendo il
-     * numero di codice
-     * 
+     * metodo GET prenotazione che restituisce una prenotazione di una camera d'hotel fornendo il numero di codice
+     *
      * @param codice univoco che identifica la prenotazione
      * @return il riferimento all'oggetto (accesso in modifica)
      * @throws AgenziaException
@@ -875,7 +895,6 @@ public class GestioneAgenzia {
      */
     public PrenotazioneAlloggioHotel getPrenotazioneAlloggioHotel(int codice) throws AgenziaException, IOException {
         int line_prenotazione = getLinePrenotazioneAlloggioHotel(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -884,18 +903,15 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo GET prenotazione che restituisce una prenotazione fornendo il
-     * numero di codice
-     * 
+     * metodo GET prenotazione che restituisce una prenotazione di un appartamento fornendo il numero di codice
+     *
      * @param codice univoco che identifica la prenotazione
      * @return il riferimento all'oggetto (accesso in modifica)
      * @throws AgenziaException
      * @throws IOException
      */
-    public PrenotazioneAlloggioAppartamento getPrenotazioneAlloggioAppartamento(int codice)
-            throws AgenziaException, IOException {
+    public PrenotazioneAlloggioAppartamento getPrenotazioneAlloggioAppartamento(int codice) throws AgenziaException, IOException {
         int line_prenotazione = getLinePrenotazioneAlloggioAppartamento(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -904,18 +920,15 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo GET prenotazione che restituisce una prenotazione fornendo il
-     * numero di codice
-     * 
+     * metodo GET prenotazione che restituisce una prenotazione di una casa indipendente fornendo il numero di codice
+     *
      * @param codice univoco che identifica la prenotazione
      * @return il riferimento all'oggetto (accesso in modifica)
      * @throws AgenziaException
      * @throws IOException
      */
-    public PrenotazioneAlloggioCasaIndipendente getPrenotazioneAlloggioCasaIndipendente(int codice)
-            throws AgenziaException, IOException {
+    public PrenotazioneAlloggioCasaIndipendente getPrenotazioneAlloggioCasaIndipendente(int codice) throws AgenziaException, IOException {
         int line_prenotazione = getLinePrenotazioneAlloggioCasaIndipendente(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -924,18 +937,15 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo GET prenotazione che restituisce una prenotazione fornendo il
-     * numero di codice
-     * 
+     * metodo GET prenotazione che restituisce una prenotazione di una struttura del villaggio fornendo il numero di codice
+     *
      * @param codice univoco che identifica la prenotazione
      * @return il riferimento all'oggetto (accesso in modifica)
      * @throws AgenziaException
      * @throws IOException
      */
-    public PrenotazioneAlloggioVillaggio getPrenotazioneAlloggioVillaggio(int codice)
-            throws AgenziaException, IOException {
+    public PrenotazioneAlloggioVillaggio getPrenotazioneAlloggioVillaggio(int codice) throws AgenziaException, IOException {
         int line_prenotazione = getLinePrenotazioneAlloggioVillaggio(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -944,9 +954,8 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo GET prenotazione che restituisce una prenotazione fornendo il
-     * numero di codice
-     * 
+     * metodo GET prenotazione che restituisce una prenotazione di posti sull'aereo fornendo il numero di codice
+     *
      * @param codice univoco che identifica la prenotazione
      * @return il riferimento all'oggetto (accesso in modifica)
      * @throws AgenziaException
@@ -954,7 +963,6 @@ public class GestioneAgenzia {
      */
     public PrenotazioneViaggioAereo getPrenotazioneViaggioAereo(int codice) throws AgenziaException, IOException {
         int line_prenotazione = getLinePrenotazioneViaggioAereo(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -963,9 +971,8 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo GET prenotazione che restituisce una prenotazione fornendo il
-     * numero di codice
-     * 
+     * metodo GET prenotazione che restituisce una prenotazione di posti sull'autobus fornendo il numero di codice
+     *
      * @param codice univoco che identifica la prenotazione
      * @return il riferimento all'oggetto (accesso in modifica)
      * @throws AgenziaException
@@ -973,7 +980,6 @@ public class GestioneAgenzia {
      */
     public PrenotazioneViaggioAutobus getPrenotazioneViaggioAutobus(int codice) throws AgenziaException, IOException {
         int line_prenotazione = getLinePrenotazioneViaggioAutobus(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -982,9 +988,8 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo GET prenotazione che restituisce una prenotazione fornendo il
-     * numero di codice
-     * 
+     * metodo GET prenotazione che restituisce una prenotazione di posti sul treno fornendo il numero di codice
+     *
      * @param codice univoco che identifica la prenotazione
      * @return il riferimento all'oggetto (accesso in modifica)
      * @throws AgenziaException
@@ -992,7 +997,6 @@ public class GestioneAgenzia {
      */
     public PrenotazioneViaggioTreno getPrenotazioneViaggioTreno(int codice) throws AgenziaException, IOException {
         int line_prenotazione = getLinePrenotazioneViaggioTreno(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -1001,18 +1005,16 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo SET prenotazione che modifica una prenotazione esistente,
-     * ricercata tramite il codice che la indentifica, con un'altra prenotazione
-     * che la sostituisce
-     * 
+     * metodo SET prenotazione di una camera d'hotel che modifica una prenotazione esistente, ricercata tramite il codice
+     * che la indentifica, con un'altra prenotazione che la sostituisce
+     *
      * @param codice univoco che identifica la prenotazione
-     * @param pH     prenotazione con cui sostituire quella ricercata
+     * @param pH prenotazione con cui sostituire quella ricercata
      * @throws AgenziaException
      * @throws IOException
      * @throws CloneNotSupportedException
      */
-    public void setPrenotazioneAlloggioHotel(int codice, PrenotazioneAlloggioHotel pH)
-            throws AgenziaException, IOException, CloneNotSupportedException {
+    public void setPrenotazioneAlloggioHotel(int codice, PrenotazioneAlloggioHotel pH) throws AgenziaException, IOException, CloneNotSupportedException {
         // verifico che le date siano in ordine cronologico corretto
         if (pH.getDataInizioSoggiorno().isAfter(pH.getDataFineSoggiorno())) {
             throw new RangeDataNonValido(pH.getDataInizioSoggiorno(), pH.getDataFineSoggiorno());
@@ -1024,8 +1026,7 @@ public class GestioneAgenzia {
             throw new PrenotazioneNonTrovata(codice);
         }
 
-        // verifico che in tutte le giornate della prenotazione ci sia una camera
-        // disponibile
+        // verifico che in tutte le giornate della prenotazione ci sia una camera disponibile
         int giorni_prenotazione = (int) DAYS.between(pH.getDataInizioSoggiorno(), pH.getDataFineSoggiorno());
         for (int g = 0; g < giorni_prenotazione; g++) {
             if (!verificaDisponibilitaHotel(pH.getTipoCamera(), pH.getDataInizioSoggiorno().plusDays(g))) {
@@ -1033,9 +1034,7 @@ public class GestioneAgenzia {
             }
         }
 
-        // se non trovo il codice da eliminare
         int line_prenotazione2 = getLinePrenotazioneAlloggioHotel(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione2 == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -1045,18 +1044,16 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo SET prenotazione che modifica una prenotazione esistente,
-     * ricercata tramite il codice che la indentifica, con un'altra prenotazione
-     * che la sostituisce
-     * 
+     * metodo SET prenotazione di un appartamento che modifica una prenotazione esistente, ricercata tramite il codice
+     * che la indentifica, con un'altra prenotazione che la sostituisce
+     *
      * @param codice univoco che identifica la prenotazione
-     * @param pA     prenotazione con cui sostituire quella ricercata
+     * @param pA prenotazione con cui sostituire quella ricercata
      * @throws AgenziaException
      * @throws IOException
      * @throws CloneNotSupportedException
      */
-    public void setPrenotazioneAlloggioAppartamento(int codice, PrenotazioneAlloggioAppartamento pA)
-            throws AgenziaException, IOException, CloneNotSupportedException {
+    public void setPrenotazioneAlloggioAppartamento(int codice, PrenotazioneAlloggioAppartamento pA) throws AgenziaException, IOException, CloneNotSupportedException {
         // verifico che le date siano in ordine cronologico corretto
         if (pA.getDataInizioSoggiorno().isAfter(pA.getDataFineSoggiorno())) {
             throw new RangeDataNonValido(pA.getDataInizioSoggiorno(), pA.getDataFineSoggiorno());
@@ -1068,8 +1065,7 @@ public class GestioneAgenzia {
             throw new PrenotazioneNonTrovata(codice);
         }
 
-        // verifico che in tutte le giornate della prenotazione ci sia una camera
-        // disponibile
+        // verifico che in tutte le giornate della prenotazione ci sia una camera disponibile
         int giorni_prenotazione = (int) DAYS.between(pA.getDataInizioSoggiorno(), pA.getDataFineSoggiorno());
         for (int g = 0; g < giorni_prenotazione; g++) {
             if (!verificaDisponibilitaAppartamento(pA.getTipoAppartamento(), pA.getDataInizioSoggiorno().plusDays(g))) {
@@ -1077,10 +1073,8 @@ public class GestioneAgenzia {
             }
         }
 
-        // se non trovo il codice da eliminare
         int line_prenotazione2 = getLinePrenotazioneAlloggioAppartamento(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
-        if (line_prenotazione2 == -1) {
+      if (line_prenotazione2 == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
         // inserisco la nuova prenotaizone (in copia) sostituendola all'indice trovato
@@ -1089,18 +1083,16 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo SET prenotazione che modifica una prenotazione esistente,
-     * ricercata tramite il codice che la indentifica, con un'altra prenotazione
-     * che la sostituisce
-     * 
+     * metodo SET prenotazione di una casa indipendente che modifica una prenotazione esistente, ricercata tramite il codice
+     * che la indentifica, con un'altra prenotazione che la sostituisce
+     *
      * @param codice univoco che identifica la prenotazione
-     * @param pC     prenotazione con cui sostituire quella ricercata
+     * @param pC prenotazione con cui sostituire quella ricercata
      * @throws AgenziaException
      * @throws IOException
      * @throws CloneNotSupportedException
      */
-    public void setPrenotazioneAlloggioCasaIndipendente(int codice, PrenotazioneAlloggioCasaIndipendente pC)
-            throws AgenziaException, IOException, CloneNotSupportedException {
+    public void setPrenotazioneAlloggioCasaIndipendente(int codice, PrenotazioneAlloggioCasaIndipendente pC) throws AgenziaException, IOException, CloneNotSupportedException {
         // verifico che le date siano in ordine cronologico corretto
         if (pC.getDataInizioSoggiorno().isAfter(pC.getDataFineSoggiorno())) {
             throw new RangeDataNonValido(pC.getDataInizioSoggiorno(), pC.getDataFineSoggiorno());
@@ -1112,19 +1104,15 @@ public class GestioneAgenzia {
             throw new PrenotazioneNonTrovata(codice);
         }
 
-        // verifico che in tutte le giornate della prenotazione ci sia una camera
-        // disponibile
+        // verifico che in tutte le giornate della prenotazione ci sia una camera disponibile
         int giorni_prenotazione = (int) DAYS.between(pC.getDataInizioSoggiorno(), pC.getDataFineSoggiorno());
         for (int g = 0; g < giorni_prenotazione; g++) {
-            if (!verificaDisponibilitaCasaIndipendente(pC.getTipoCasaIndipendente(),
-                    pC.getDataInizioSoggiorno().plusDays(g))) {
+            if (!verificaDisponibilitaCasaIndipendente(pC.getTipoCasaIndipendente(), pC.getDataInizioSoggiorno().plusDays(g))) {
                 throw new CasaIndipendenteNonDisponibile(pC.getTipoCasaIndipendente());
             }
         }
 
-        // se non trovo il codice da eliminare
         int line_prenotazione2 = getLinePrenotazioneAlloggioCasaIndipendente(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione2 == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -1134,18 +1122,16 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo SET prenotazione che modifica una prenotazione esistente,
-     * ricercata tramite il codice che la indentifica, con un'altra prenotazione
-     * che la sostituisce
-     * 
+     * metodo SET prenotazione di una struttura del villaggio che modifica una prenotazione esistente, ricercata tramite il codice
+     * che la indentifica, con un'altra prenotazione che la sostituisce
+     *
      * @param codice univoco che identifica la prenotazione
-     * @param pV     prenotazione con cui sostituire quella ricercata
+     * @param pV prenotazione con cui sostituire quella ricercata
      * @throws AgenziaException
      * @throws IOException
      * @throws CloneNotSupportedException
      */
-    public void setPrenotazioneAlloggioVillaggio(int codice, PrenotazioneAlloggioVillaggio pV)
-            throws AgenziaException, IOException, CloneNotSupportedException {
+    public void setPrenotazioneAlloggioVillaggio(int codice, PrenotazioneAlloggioVillaggio pV) throws AgenziaException, IOException, CloneNotSupportedException {
         // verifico che le date siano in ordine cronologico corretto
         if (pV.getDataInizioSoggiorno().isAfter(pV.getDataFineSoggiorno())) {
             throw new RangeDataNonValido(pV.getDataInizioSoggiorno(), pV.getDataFineSoggiorno());
@@ -1157,19 +1143,15 @@ public class GestioneAgenzia {
             throw new PrenotazioneNonTrovata(codice);
         }
 
-        // verifico che in tutte le giornate della prenotazione ci sia una camera
-        // disponibile
+        // verifico che in tutte le giornate della prenotazione ci sia una camera disponibile
         int giorni_prenotazione = (int) DAYS.between(pV.getDataInizioSoggiorno(), pV.getDataFineSoggiorno());
         for (int g = 0; g < giorni_prenotazione; g++) {
-            if (!verificaDisponibilitaStrutturaVillaggio(pV.getTipoStrutturaVillaggio(),
-                    pV.getDataInizioSoggiorno().plusDays(g))) {
+            if (!verificaDisponibilitaStrutturaVillaggio(pV.getTipoStrutturaVillaggio(), pV.getDataInizioSoggiorno().plusDays(g))) {
                 throw new StrutturaVillaggioNonDisponibile(pV.getTipoStrutturaVillaggio());
             }
         }
 
-        // se non trovo il codice da eliminare
         int line_prenotazione2 = getLinePrenotazioneAlloggioVillaggio(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione2 == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -1178,19 +1160,18 @@ public class GestioneAgenzia {
 
     }
 
+   
     /**
-     * metodo SET prenotazione che modifica una prenotazione esistente,
-     * ricercata tramite il codice che la indentifica, con un'altra prenotazione
-     * che la sostituisce
-     * 
+     * metodo SET prenotazione di posti sull'aereo che modifica una prenotazione esistente, ricercata tramite il codice
+     * che la indentifica, con un'altra prenotazione che la sostituisce
+     *
      * @param codice univoco che identifica la prenotazione
-     * @param pA     prenotazione con cui sostituire quella ricercata
+     * @param pA prenotazione con cui sostituire quella ricercata
      * @throws AgenziaException
      * @throws IOException
      * @throws CloneNotSupportedException
      */
-    public void setPrenotazioneViaggioAereo(int codice, PrenotazioneViaggioAereo pA)
-            throws AgenziaException, IOException, CloneNotSupportedException {
+    public void setPrenotazioneViaggioAereo(int codice, PrenotazioneViaggioAereo pA) throws AgenziaException, IOException, CloneNotSupportedException {
         // verifico che le date siano in ordine cronologico corretto
         if (pA.getDataPartenza().isAfter(pA.getDataArrivo())) {
             throw new RangeDataTimeNonValido(pA.getDataPartenza(), pA.getDataArrivo());
@@ -1202,18 +1183,15 @@ public class GestioneAgenzia {
             throw new PrenotazioneNonTrovata(codice);
         }
 
-        // verifico che in tutto il tempo della prenotazione del viaggio ci sia un posto
-        // disponibile
+        // verifico che in tutto il tempo della prenotazione del viaggio ci sia un posto disponibile
         int secondi_viaggio = (int) SECONDS.between(pA.getDataPartenza(), pA.getDataArrivo());
         for (int s = 0; s < secondi_viaggio; s++) {
-            if (!verificaDisponibilitaAereo(pA.getTipoClasseMezzo(), pA.getDataPartenza().plusSeconds(s))) {
+            if (!verificaDisponibilitaAereo(pA.getTipoClasseMezzo(), pA.getDataPartenza().plusSeconds(s),pA.getLuogoPartenza(),pA.getLuogoArrivo())) {
                 throw new ClasseMezzoNonDisponibile(pA.getTipoClasseMezzo());
             }
         }
 
-        // se non trovo il codice da eliminare
         int line_prenotazione2 = getLinePrenotazioneViaggioAereo(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione2 == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -1223,18 +1201,16 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo SET prenotazione che modifica una prenotazione esistente,
-     * ricercata tramite il codice che la indentifica, con un'altra prenotazione
-     * che la sostituisce
-     * 
+     * metodo SET  prenotazione di posti sul treno che modifica una prenotazione esistente, ricercata tramite il codice
+     * che la indentifica, con un'altra prenotazione che la sostituisce
+     *
      * @param codice univoco che identifica la prenotazione
-     * @param pT     prenotazione con cui sostituire quella ricercata
+     * @param pT prenotazione con cui sostituire quella ricercata
      * @throws AgenziaException
      * @throws IOException
      * @throws CloneNotSupportedException
      */
-    public void setPrenotazioneViaggioTreno(int codice, PrenotazioneViaggioTreno pT)
-            throws AgenziaException, IOException, CloneNotSupportedException {
+    public void setPrenotazioneViaggioTreno(int codice, PrenotazioneViaggioTreno pT) throws AgenziaException, IOException, CloneNotSupportedException {
         // verifico che le date siano in ordine cronologico corretto
 
         // verifico che gli orari siano in ordine cronologico corretto
@@ -1248,18 +1224,15 @@ public class GestioneAgenzia {
             throw new PrenotazioneNonTrovata(codice);
         }
 
-        // verifico che in tutto il tempo della prenotazione del viaggio ci sia un posto
-        // disponibile
+        // verifico che in tutto il tempo della prenotazione del viaggio ci sia un posto disponibile
         int secondi_viaggio = (int) SECONDS.between(pT.getDataPartenza(), pT.getDataArrivo());
         for (int s = 0; s < secondi_viaggio; s++) {
-            if (!verificaDisponibilitaAereo(pT.getTipoClasseMezzo(), pT.getDataPartenza().plusSeconds(s))) {
+            if (!verificaDisponibilitaAereo(pT.getTipoClasseMezzo(), pT.getDataPartenza().plusSeconds(s),pT.getLuogoPartenza(),pT.getLuogoArrivo())) {
                 throw new ClasseMezzoNonDisponibile(pT.getTipoClasseMezzo());
             }
         }
 
-        // se non trovo il codice da eliminare
         int line_prenotazione2 = getLinePrenotazioneViaggioTreno(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione2 == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -1269,18 +1242,16 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo SET prenotazione che modifica una prenotazione esistente,
-     * ricercata tramite il codice che la indentifica, con un'altra prenotazione
-     * che la sostituisce
-     * 
+     * metodo SET prenotazione di posti sull'autobus che modifica una prenotazione esistente, ricercata tramite il codice
+     * che la indentifica, con un'altra prenotazione che la sostituisce
+     *
      * @param codice univoco che identifica la prenotazione
-     * @param pA     prenotazione con cui sostituire quella ricercata
+     * @param pA prenotazione con cui sostituire quella ricercata
      * @throws AgenziaException
      * @throws IOException
      * @throws CloneNotSupportedException
      */
-    public void setPrenotazioneViaggioAutobus(int codice, PrenotazioneViaggioAutobus pA)
-            throws AgenziaException, IOException, CloneNotSupportedException {
+    public void setPrenotazioneViaggioAutobus(int codice, PrenotazioneViaggioAutobus pA) throws AgenziaException, IOException, CloneNotSupportedException {
         // verifico che le date siano in ordine cronologico corretto
         if (pA.getDataPartenza().isAfter(pA.getDataArrivo())) {
             throw new RangeDataTimeNonValido(pA.getDataPartenza(), pA.getDataArrivo());
@@ -1292,18 +1263,14 @@ public class GestioneAgenzia {
             throw new PrenotazioneNonTrovata(codice);
         }
 
-        // verifico che in tutto il tempo della prenotazione del viaggio ci sia un posto
-        // disponibile
+        // verifico che in tutto il tempo della prenotazione del viaggio ci sia un posto disponibile
         int secondi_viaggio = (int) SECONDS.between(pA.getDataPartenza(), pA.getDataArrivo());
         for (int s = 0; s < secondi_viaggio; s++) {
-            if (!verificaDisponibilitaAereo(pA.getTipoClasseMezzo(), pA.getDataPartenza().plusSeconds(s))) {
+            if (!verificaDisponibilitaAereo(pA.getTipoClasseMezzo(), pA.getDataPartenza().plusSeconds(s),pA.getLuogoPartenza(),pA.getLuogoArrivo())) {
                 throw new ClasseMezzoNonDisponibile(pA.getTipoClasseMezzo());
             }
         }
-
-        // se non trovo il codice da eliminare
         int line_prenotazione2 = getLinePrenotazioneViaggioAutobus(codice);
-        // se non ho trovato il libro ricercato sollevo una eccezione
         if (line_prenotazione2 == -1) {
             throw new PrenotazioneNonTrovata(codice);
         }
@@ -1312,150 +1279,221 @@ public class GestioneAgenzia {
 
     }
 
-    /*
-     * ArrayList<PrenotazioneAlloggio> getPrenotazioniCliente(String nomeCliente) {
-     * ArrayList<PrenotazioneViaggioTreno> prenotazioni_cliente = new ArrayList<>();
-     * // in questo caso non necessito di doppio ciclo poichè non devo dimensionare
-     * l'array
-     * // l'ArrayList ha dimensione che varia in modo dinamico
-     * for (int i = 0; i < prenotazioni.size(); i++) {
-     * if (prenotazioni.get(i).getNomeCliente().equals(nomeCliente)) {
-     * prenotazioni_cliente.add(new Prenotazione(prenotazioni.get(i)));
-     * }
-     * }
-     * return prenotazioni_cliente;
-     * }
-     */
+     
+     
     /**
-     * 
-     * @param anno
-     * @return
-     * @throws IOException
+     * metodo per calcolare l'incasso annuale dell'hotel
+     * @param anno di cui calcolare l'incasso totale
+* @return l'incasso derivante da tutte le prenotazioni  dell'hotel la cui data finale
+     * ricade nell'anno dato in input
+     * @throws IOException 
      */
-    public int calcolaIncassoAnnualeTotaleAgenzia(int anno) throws IOException {
+    public int calcolaIncassoAnnualeTotaleHotel(int anno) throws IOException {
 
         ArrayList<PrenotazioneAlloggioHotel> prenotazioniAlloggioHotel = ioPAHotel.loadData();
-        ArrayList<PrenotazioneAlloggioAppartamento> prenotazioniAlloggioAppartamento = ioPAAppartamento.loadData();
-        ArrayList<PrenotazioneAlloggioCasaIndipendente> prenotazioniAlloggioCasaIndipendente = ioPACasaIndipendente
-                .loadData();
-        ArrayList<PrenotazioneAlloggioVillaggio> prenotazioniAlloggioVillaggio = ioPAVillaggio.loadData();
-        ArrayList<PrenotazioneViaggioAereo> prenotazioniViaggioAereo = ioPVAereo.loadData();
-        ArrayList<PrenotazioneViaggioAutobus> prenotazioniViaggioAutobus = ioPVAutobus.loadData();
-        ArrayList<PrenotazioneViaggioTreno> prenotazioniViaggioTreno = ioPVTreno.loadData();
         int incasso_tot_per_anno = 0;
         for (int i = 0; i < prenotazioniAlloggioHotel.size(); i++) {
             if (prenotazioniAlloggioHotel.get(i).getDataFineSoggiorno().getYear() == anno) {
                 incasso_tot_per_anno += prenotazioniAlloggioHotel.get(i).calcolaPrezzoSoggiorno();
             }
         }
-        for (int i = 0; i < prenotazioniAlloggioAppartamento.size(); i++) {
+        
+        return incasso_tot_per_anno;
+    }
+    /**
+     * metodo per calcolare l'incasso annuale degli appartamenti
+     * @param anno di cui calcolare l'incasso totale
+* @return l'incasso derivante da tutte le prenotazioni degli appartamenti la cui data finale
+     * ricade nell'anno dato in input
+     * @throws IOException 
+     */
+     public int calcolaIncassoAnnualeTotaleAppartamenti(int anno) throws IOException {
+
+        ArrayList<PrenotazioneAlloggioAppartamento> prenotazioniAlloggioAppartamento = ioPAAppartamento.loadData();
+        int incasso_tot_per_anno = 0;
+       
+         for (int i = 0; i < prenotazioniAlloggioAppartamento.size(); i++) {
             if (prenotazioniAlloggioAppartamento.get(i).getDataFineSoggiorno().getYear() == anno) {
                 incasso_tot_per_anno += prenotazioniAlloggioAppartamento.get(i).calcolaPrezzoSoggiorno();
             }
         }
-        for (int i = 0; i < prenotazioniAlloggioCasaIndipendente.size(); i++) {
+        
+        return incasso_tot_per_anno;
+    }
+     /**
+      * metodo per calcolare l'incasso annuale delle case indipendenti
+      * @param anno
+* @return l'incasso derivante da tutte le prenotazioni delle case indipendenti la cui data finale
+     * ricade nell'anno dato in input
+     * @throws IOException 
+      */
+      public int calcolaIncassoAnnualeTotaleCaseIndipendenti(int anno) throws IOException {
+
+        ArrayList<PrenotazioneAlloggioCasaIndipendente> prenotazioniAlloggioCasaIndipendente = ioPACasaIndipendente.loadData();
+        int incasso_tot_per_anno = 0;
+       
+       for (int i = 0; i < prenotazioniAlloggioCasaIndipendente.size(); i++) {
             if (prenotazioniAlloggioCasaIndipendente.get(i).getDataFineSoggiorno().getYear() == anno) {
                 incasso_tot_per_anno += prenotazioniAlloggioCasaIndipendente.get(i).calcolaPrezzoSoggiorno();
             }
         }
+        
+        return incasso_tot_per_anno;
+    }
+      /**
+       * metodo per calcolare l'incasso annuale del villaggio
+       * @param anno di cui calcolare l'incasso totale
+* @return l'incasso derivante da tutte le prenotazioni del villaggio la cui data finale
+     * ricade nell'anno dato in input
+     * @throws IOException 
+       */
+ public int calcolaIncassoAnnualeTotaleVillaggio(int anno) throws IOException {
+
+        ArrayList<PrenotazioneAlloggioVillaggio> prenotazioniAlloggioVillaggio = ioPAVillaggio.loadData();
+        int incasso_tot_per_anno = 0;
+       
         for (int i = 0; i < prenotazioniAlloggioVillaggio.size(); i++) {
             if (prenotazioniAlloggioVillaggio.get(i).getDataFineSoggiorno().getYear() == anno) {
                 incasso_tot_per_anno += prenotazioniAlloggioVillaggio.get(i).calcolaPrezzoSoggiorno();
             }
         }
-        for (int i = 0; i < prenotazioniViaggioAereo.size(); i++) {
+        
+        return incasso_tot_per_anno;
+    }
+ /**
+  * metodo per calcolare l'incasso annuale dell'aereo
+  * @param anno di cui calcolare l'incasso totale
+  * @return l'incasso derivante da tutte le prenotazioni dell'aereo la cui data finale
+     * ricade nell'anno dato in input
+  * @throws IOException 
+  */
+    public int calcolaIncassoAnnualeTotaleAereo(int anno) throws IOException {
+
+        ArrayList<PrenotazioneViaggioAereo> prenotazioniViaggioAereo = ioPVAereo.loadData();
+        int incasso_tot_per_anno = 0;
+       for (int i = 0; i < prenotazioniViaggioAereo.size(); i++) {
             if (prenotazioniViaggioAereo.get(i).getDataPartenza().getYear() == anno) {
                 incasso_tot_per_anno += prenotazioniViaggioAereo.get(i).calcolaPrezzoViaggio();
             }
         }
-        for (int i = 0; i < prenotazioniViaggioAutobus.size(); i++) {
+        
+        return incasso_tot_per_anno;
+    }
+    /**
+     * metodo per calcolare l'incasso annuale dell'autobus
+     * @param anno di cui calcolare l'incasso totale
+     * @return l'incasso derivante da tutte le prenotazioni dell'autobus la cui data finale
+     * ricade nell'anno dato in input
+     * @throws IOException 
+     */
+    public int calcolaIncassoAnnualeTotaleAutobus(int anno) throws IOException {
+
+        ArrayList<PrenotazioneViaggioAutobus> prenotazioniViaggioAutobus = ioPVAutobus.loadData();
+        int incasso_tot_per_anno = 0;
+         for (int i = 0; i < prenotazioniViaggioAutobus.size(); i++) {
             if (prenotazioniViaggioAutobus.get(i).getDataPartenza().getYear() == anno) {
                 incasso_tot_per_anno += prenotazioniViaggioAutobus.get(i).calcolaPrezzoViaggio();
             }
         }
+        
+        return incasso_tot_per_anno;
+    }
+    /**
+     * metodo per calcolare l'incasso annuale del treno
+     * @param anno di cui calcolare l'incasso totale
+     * @return l'incasso derivante da tutte le prenotazioni del treno la cui data finale
+     * ricade nell'anno dato in input
+     * @throws IOException 
+     */
+    public int calcolaIncassoAnnualeTotaleTreno(int anno) throws IOException {
+
+        ArrayList<PrenotazioneViaggioTreno> prenotazioniViaggioTreno = ioPVTreno.loadData();
+        int incasso_tot_per_anno = 0;
         for (int i = 0; i < prenotazioniViaggioTreno.size(); i++) {
             if (prenotazioniViaggioTreno.get(i).getDataPartenza().getYear() == anno) {
                 incasso_tot_per_anno += prenotazioniViaggioTreno.get(i).calcolaPrezzoViaggio();
             }
         }
+        
+        return incasso_tot_per_anno;
+    }
+    /**
+     * metodo per calcolare l'incasso annuale degli alloggi
+     * @param anno di cui calcolare l'incasso totale
+     * @return l'incasso derivante da tutte le prenotazioni inerenti agli alloggi la cui data finale
+     * ricade nell'anno dato in input
+     * @throws IOException 
+     */
+    public int calcolaIncassoAnnualeTotaleAlloggi(int anno) throws IOException {
+       
+        int incasso_tot_per_anno=calcolaIncassoAnnualeTotaleHotel( anno) +
+                calcolaIncassoAnnualeTotaleAppartamenti( anno) +
+                calcolaIncassoAnnualeTotaleCaseIndipendenti( anno)+calcolaIncassoAnnualeTotaleVillaggio(anno);
+        return incasso_tot_per_anno;
+    }
+    /**
+     * metodo per calcolare l'incasso annuale dei mezzi di trasporto
+     * @param anno di cui calcolare l'incasso totale
+     * @return l'incasso derivante da tutte le prenotazioni inerenti ai mezzi di trasporto la cui 
+     * data finale icade nell'anno dato in input
+     * @throws IOException 
+     */
+    public int calcolaIncassoAnnualeTotaleMezziTrasporto(int anno) throws IOException {
+       
+        int incasso_tot_per_anno=calcolaIncassoAnnualeTotaleAereo(anno)+calcolaIncassoAnnualeTotaleAutobus( anno)+
+                calcolaIncassoAnnualeTotaleTreno( anno);
+        return incasso_tot_per_anno;
+    }
+    /**
+      * metodo per calcolare l'incasso annuale dell'agenzia sommando gli incassi di ogni tipo di 
+      * prenotazione
+     * @param anno di cui calcolare l'incasso totale
+     * @return l'incasso derivante da tutte le prenotazioni dell'agenzia la cui data finale
+     * ricade nell'anno dato in input
+     * @throws IOException
+     */
+    public int calcolaIncassoAnnualeTotaleAgenzia(int anno) throws IOException {
+       
+        int incasso_tot_per_anno=calcolaIncassoAnnualeTotaleHotel( anno) +
+                calcolaIncassoAnnualeTotaleAppartamenti( anno) +
+                calcolaIncassoAnnualeTotaleCaseIndipendenti( anno)+calcolaIncassoAnnualeTotaleVillaggio(anno)+
+                calcolaIncassoAnnualeTotaleAereo(anno)+calcolaIncassoAnnualeTotaleAutobus( anno)+
+                calcolaIncassoAnnualeTotaleTreno( anno);
         return incasso_tot_per_anno;
     }
 
     /**
-     * 
-     * @param anno
-     * @return
+      * metodo per trovare la/le massima/e/i fonte di guadagno annuale dell'agenzia
+     * @param anno di cui trovare la/le massima/e/i fonte di guadagno 
+     * @return stringa che indica la/le massima/e/i fonte di guadagno con il rispettivo guadagno
      * @throws IOException
      */
     public String TrovaFonteMaxGuadagnoAnnuale(int anno) throws IOException {
-        String fonte_incasso_max = "la/le principale/i fonte/i di guadagno nell'anno " + anno + " è/sono";
+        String fonte_incasso_max = "la/le principale/i fonte/i di guadagno nell'anno " + anno + " è/sono ";
         int incasso_tot_max;
-        ArrayList<PrenotazioneAlloggioHotel> prenotazioniAlloggioHotel = ioPAHotel.loadData();
-        ArrayList<PrenotazioneAlloggioAppartamento> prenotazioniAlloggioAppartamento = ioPAAppartamento.loadData();
-        ArrayList<PrenotazioneAlloggioCasaIndipendente> prenotazioniAlloggioCasaIndipendente = ioPACasaIndipendente
-                .loadData();
-        ArrayList<PrenotazioneAlloggioVillaggio> prenotazioniAlloggioVillaggio = ioPAVillaggio.loadData();
-        ArrayList<PrenotazioneViaggioAereo> prenotazioniViaggioAereo = ioPVAereo.loadData();
-        ArrayList<PrenotazioneViaggioAutobus> prenotazioniViaggioAutobus = ioPVAutobus.loadData();
-        ArrayList<PrenotazioneViaggioTreno> prenotazioniViaggioTreno = ioPVTreno.loadData();
-        int incasso_tot_per_anno_prenotazioniAlloggioHotel = 0;
-        for (int i = 0; i < prenotazioniAlloggioHotel.size(); i++) {
-            if (prenotazioniAlloggioHotel.get(i).getDataFineSoggiorno().getYear() == anno) {
-                incasso_tot_per_anno_prenotazioniAlloggioHotel += prenotazioniAlloggioHotel.get(i)
-                        .calcolaPrezzoSoggiorno();
-            }
-        }
+        int incasso_tot_per_anno_prenotazioniAlloggioHotel = calcolaIncassoAnnualeTotaleHotel( anno);
 
-        int incasso_tot_per_anno_prenotazioniAlloggioAppartamento = 0;
-        for (int i = 0; i < prenotazioniAlloggioAppartamento.size(); i++) {
-            if (prenotazioniAlloggioAppartamento.get(i).getDataFineSoggiorno().getYear() == anno) {
-                incasso_tot_per_anno_prenotazioniAlloggioAppartamento += prenotazioniAlloggioAppartamento.get(i)
-                        .calcolaPrezzoSoggiorno();
-            }
-        }
+        int incasso_tot_per_anno_prenotazioniAlloggioAppartamento =calcolaIncassoAnnualeTotaleAppartamenti( anno) ;
         incasso_tot_max = Math.max(incasso_tot_per_anno_prenotazioniAlloggioHotel,
                 incasso_tot_per_anno_prenotazioniAlloggioAppartamento);
-        int incasso_tot_per_anno_prenotazioniAlloggioCasaIndipendente = 0;
-        for (int i = 0; i < prenotazioniAlloggioCasaIndipendente.size(); i++) {
-            if (prenotazioniAlloggioCasaIndipendente.get(i).getDataFineSoggiorno().getYear() == anno) {
-                incasso_tot_per_anno_prenotazioniAlloggioCasaIndipendente += prenotazioniAlloggioCasaIndipendente.get(i)
-                        .calcolaPrezzoSoggiorno();
-            }
-        }
+        
+        int incasso_tot_per_anno_prenotazioniAlloggioCasaIndipendente =  calcolaIncassoAnnualeTotaleCaseIndipendenti( anno);
         incasso_tot_max = Math.max(incasso_tot_max,
                 incasso_tot_per_anno_prenotazioniAlloggioCasaIndipendente);
-        int incasso_tot_per_anno_prenotazioniAlloggioVillaggio = 0;
-        for (int i = 0; i < prenotazioniAlloggioVillaggio.size(); i++) {
-            if (prenotazioniAlloggioVillaggio.get(i).getDataFineSoggiorno().getYear() == anno) {
-                incasso_tot_per_anno_prenotazioniAlloggioVillaggio += prenotazioniAlloggioVillaggio.get(i)
-                        .calcolaPrezzoSoggiorno();
-            }
-        }
+        
+        int incasso_tot_per_anno_prenotazioniAlloggioVillaggio = calcolaIncassoAnnualeTotaleVillaggio(anno);
         incasso_tot_max = Math.max(incasso_tot_max,
                 incasso_tot_per_anno_prenotazioniAlloggioVillaggio);
-        int incasso_tot_per_anno_prenotazioniViaggioAereo = 0;
-        for (int i = 0; i < prenotazioniViaggioAereo.size(); i++) {
-            if (prenotazioniViaggioAereo.get(i).getDataPartenza().getYear() == anno) {
-                incasso_tot_per_anno_prenotazioniViaggioAereo += prenotazioniViaggioAereo.get(i).calcolaPrezzoViaggio();
-            }
-        }
+        
+        int incasso_tot_per_anno_prenotazioniViaggioAereo = calcolaIncassoAnnualeTotaleAereo(anno);
         incasso_tot_max = Math.max(incasso_tot_max,
                 incasso_tot_per_anno_prenotazioniViaggioAereo);
-        int incasso_tot_per_anno_prenotazioniViaggioAutobus = 0;
-        for (int i = 0; i < prenotazioniViaggioAutobus.size(); i++) {
-            if (prenotazioniViaggioAutobus.get(i).getDataPartenza().getYear() == anno) {
-                incasso_tot_per_anno_prenotazioniViaggioAutobus += prenotazioniViaggioAutobus.get(i)
-                        .calcolaPrezzoViaggio();
-            }
-        }
+        
+        int incasso_tot_per_anno_prenotazioniViaggioAutobus = calcolaIncassoAnnualeTotaleAutobus( anno);
         incasso_tot_max = Math.max(incasso_tot_max,
                 incasso_tot_per_anno_prenotazioniViaggioAutobus);
-        int incasso_tot_per_anno_prenotazioniViaggioTreno = 0;
-        for (int i = 0; i < prenotazioniViaggioTreno.size(); i++) {
-            if (prenotazioniViaggioTreno.get(i).getDataPartenza().getYear() == anno) {
-                incasso_tot_per_anno_prenotazioniViaggioTreno += prenotazioniViaggioTreno.get(i).calcolaPrezzoViaggio();
-            }
-        }
+        
+        int incasso_tot_per_anno_prenotazioniViaggioTreno = calcolaIncassoAnnualeTotaleTreno( anno);
         incasso_tot_max = Math.max(incasso_tot_max,
                 incasso_tot_per_anno_prenotazioniViaggioTreno);
         if (incasso_tot_max == incasso_tot_per_anno_prenotazioniAlloggioHotel) {
@@ -1479,13 +1517,20 @@ public class GestioneAgenzia {
         if (incasso_tot_max == incasso_tot_per_anno_prenotazioniViaggioTreno) {
             fonte_incasso_max += "i treni, per un totale di " + incasso_tot_max;
         }
-        return fonte_incasso_max;
+        if (incasso_tot_max == 0) {
+            return "nell'anno " + anno + " non è stato registrato nessun guadagno";
+
+        } else {
+
+            return fonte_incasso_max;
+
+        }
     }
 
     /**
-     * metodo per stampare la lista delle prenotazioni dell'albergo
-     * 
-     * @return ArrayList delle prenotazioni dell'albergo
+     * metodo per stampare la lista delle prenotazioni delle camere d'hotel
+     *
+     * @return ArrayList delle prenotazioni delle camere d'hotel
      * @throws IOException
      */
     public ArrayList<PrenotazioneAlloggioHotel> stampaListaPrenotazioniAlloggioHotel() throws IOException {
@@ -1494,30 +1539,28 @@ public class GestioneAgenzia {
 
     /**
      * metodo per stampare la lista delle prenotazioni delle case indipendenti
-     * 
+     *
      * @return ArrayList delle prenotazioni delle case indipendenti
      * @throws IOException
      */
-    public ArrayList<PrenotazioneAlloggioCasaIndipendente> stampaListaPrenotazioniAlloggioCasaIndipendente()
-            throws IOException {
+    public ArrayList<PrenotazioneAlloggioCasaIndipendente> stampaListaPrenotazioniAlloggioCasaIndipendente() throws IOException {
         return ioPACasaIndipendente.loadData();
     }
 
     /**
      * metodo per stampare la lista delle prenotazioni degli appartamenti
-     * 
+     *
      * @return ArrayList delle prenotazioni degli appartamenti
      * @throws IOException
      */
-    public ArrayList<PrenotazioneAlloggioAppartamento> stampaListaPrenotazioniAlloggioAppartamento()
-            throws IOException {
+    public ArrayList<PrenotazioneAlloggioAppartamento> stampaListaPrenotazioniAlloggioAppartamento() throws IOException {
         return ioPAAppartamento.loadData();
     }
 
     /**
-     * metodo per stampare la lista delle prenotazioni del villaggio
-     * 
-     * @return ArrayList delle prenotazioni del villaggio
+     * metodo per stampare la lista delle prenotazioni delle strutture villaggio
+     *
+     * @return ArrayList delle prenotazioni delle strutture villaggio
      * @throws IOException
      */
     public ArrayList<PrenotazioneAlloggioVillaggio> stampaListaPrenotazioniAlloggioVillaggio() throws IOException {
@@ -1525,9 +1568,9 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo per stampare la lista delle prenotazioni dell'aereo
-     * 
-     * @return ArrayList delle prenotazioni dell'aereo
+     * metodo per stampare la lista delle prenotazioni dei posti dell'aereo
+     *
+     * @return ArrayList delle prenotazioni dei posti dell'aereo
      * @throws IOException
      */
     public ArrayList<PrenotazioneViaggioAereo> stampaListaPrenotazioniViaggioAereo() throws IOException {
@@ -1535,9 +1578,9 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo per stampare la lista delle prenotazioni del treno
-     * 
-     * @return ArrayList delle prenotazioni del treno
+     * metodo per stampare la lista delle prenotazioni dei posti del treno
+     *
+     * @return ArrayList delle prenotazioni dei posti del treno
      * @throws IOException
      */
     public ArrayList<PrenotazioneViaggioTreno> stampaListaPrenotazioniViaggioTreno() throws IOException {
@@ -1545,131 +1588,167 @@ public class GestioneAgenzia {
     }
 
     /**
-     * metodo per stampare la lista delle prenotazioni dell'autobus
-     * 
-     * @return ArrayList delle prenotazioni dell'autobus
+     * metodo per stampare la lista delle prenotazioni dei posti dell'autobus
+     *
+     * @return ArrayList delle prenotazioni dei posti dell'autobus
      * @throws IOException
      */
     public ArrayList<PrenotazioneViaggioAutobus> stampaListaPrenotazioniViaggioAutobus() throws IOException {
         return ioPVAutobus.loadData();
     }
+/**
+ * metodo per stampare la lista di tutte le prenotazioni dell'agenzia divise per categoria, 
+ * rispettivamente vengono stampate nell'ordine: hotel, case indipendenti, appartamenti, villaggio,
+ * aereo,treno,autobus
+ * @throws IOException 
+ */
+    public void stampaListaPrenotazioniAgenzia() throws IOException {
+        System.out.println("PRENOTAZIONI RIGUARDANTI L'HOTEL");
+        System.out.println(stampaListaPrenotazioniAlloggioHotel());
+        System.out.println("-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-");
+        System.out.println("PRENOTAZIONI RIGUARDANTI LE CASE INDIPENDENTI");
+        System.out.println(stampaListaPrenotazioniAlloggioCasaIndipendente());
+        System.out.println("-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-");
+        System.out.println("PRENOTAZIONI RIGUARDANTI GLI APPARTAMENTI");
+        System.out.println(stampaListaPrenotazioniAlloggioAppartamento());
+        System.out.println("-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-");
+        System.out.println("PRENOTAZIONI RIGUARDANTI IL VILLAGGIO");
+        System.out.println(stampaListaPrenotazioniAlloggioVillaggio());
+        System.out.println("-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-");
+        System.out.println("PRENOTAZIONI RIGUARDANTI L'AEREO");
+        System.out.println(stampaListaPrenotazioniViaggioAereo());
+        System.out.println("-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-");
+        System.out.println("PRENOTAZIONI RIGUARDANTI Il TRENO");
+        System.out.println(stampaListaPrenotazioniViaggioTreno());
+        System.out.println("-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-");
+        System.out.println("PRENOTAZIONI RIGUARDANTI L'AUTOBUS");
+        System.out.println(stampaListaPrenotazioniViaggioAutobus());
+
+    }
 
     /**
-     * ORDINAMENTO DI UN ARRAYLIST:
-     * 
+     * metodo per ordinare un arraylist di prenotazioni dell'hotel chiamando il metodo sort della
+     * classe Collections 
+     *
      * @throws IOException
      */
     public void sortPrenotazioniHotel() throws IOException {
         ArrayList<PrenotazioneAlloggioHotel> prenotazioniAlloggioHotel = ioPAHotel.loadData();
-        // ordino i dati nell'arraylist
+        //ordino i dati nell'arraylist
         Collections.sort(prenotazioniAlloggioHotel);
-        // cancello tutto quello che era scritto nel file
+        //cancello tutto quello che era scritto nel file
         ioPAHotel.clear();
-        // riscrivo l'arrayList cancellato
+        //riscrivo l'arrayList cancellato
         ioPAHotel.saveData(prenotazioniAlloggioHotel);
 
     }
 
     /**
-     * ORDINAMENTO DI UN ARRAYLIST:
-     * 
+      * metodo per ordinare un arraylist di prenotazioni delgli appartamenti chiamando il metodo
+      * sort della classe Collections 
+     *
      * @throws IOException
      */
     public void sortPrenotazioniAppartamenti() throws IOException {
         ArrayList<PrenotazioneAlloggioAppartamento> prenotazioniAlloggioAppartamento = ioPAAppartamento.loadData();
-        // ordino i dati nell'arraylist
+        //ordino i dati nell'arraylist
         Collections.sort(prenotazioniAlloggioAppartamento);
-        // cancello tutto quello che era scritto nel file
+        //cancello tutto quello che era scritto nel file
         ioPAAppartamento.clear();
-        // riscrivo l'arrayList cancellato
+        //riscrivo l'arrayList cancellato
         ioPAAppartamento.saveData(prenotazioniAlloggioAppartamento);
 
     }
 
     /**
-     * ORDINAMENTO DI UN ARRAYLIST:
-     * 
+      * metodo per ordinare un arraylist di prenotazioni delle strutture del villaggio chiamando il
+      * metodo sort della classe Collections 
+     *
      * @throws IOException
      */
     public void sortPrenotazioniStruttureVillaggio() throws IOException {
         ArrayList<PrenotazioneAlloggioVillaggio> prenotazioniAlloggioVillaggio = ioPAVillaggio.loadData();
-        // ordino i dati nell'arraylist
+        //ordino i dati nell'arraylist
         Collections.sort(prenotazioniAlloggioVillaggio);
-        // cancello tutto quello che era scritto nel file
+        //cancello tutto quello che era scritto nel file
         ioPAVillaggio.clear();
-        // riscrivo l'arrayList cancellato
+        //riscrivo l'arrayList cancellato
         ioPAVillaggio.saveData(prenotazioniAlloggioVillaggio);
 
     }
 
     /**
-     * ORDINAMENTO DI UN ARRAYLIST:
-     * 
+      * metodo per ordinare un arraylist di prenotazioni delle case indipendenti chiamando il metodo
+      * sort della classe Collections 
+     *
      * @throws IOException
      */
     public void sortPrenotazioniCaseIndipendenti() throws IOException {
-        ArrayList<PrenotazioneAlloggioCasaIndipendente> prenotazioniAlloggioCasaIndipendente = ioPACasaIndipendente
-                .loadData();
-        // ordino i dati nell'arraylist
+        ArrayList<PrenotazioneAlloggioCasaIndipendente> prenotazioniAlloggioCasaIndipendente = ioPACasaIndipendente.loadData();
+        //ordino i dati nell'arraylist
         Collections.sort(prenotazioniAlloggioCasaIndipendente);
-        // cancello tutto quello che era scritto nel file
+        //cancello tutto quello che era scritto nel file
         ioPACasaIndipendente.clear();
-        // riscrivo l'arrayList cancellato
+        //riscrivo l'arrayList cancellato
         ioPACasaIndipendente.saveData(prenotazioniAlloggioCasaIndipendente);
 
     }
 
     /**
-     * ORDINAMENTO DI UN ARRAYLIST:
-     * 
+      * metodo per ordinare un arraylist di prenotazioni dei posti sull'aereo chiamando il metodo 
+      * sort della classe Collections 
+     *
      * @throws IOException
      */
     public void sortPrenotazioniAereo() throws IOException {
         ArrayList<PrenotazioneViaggioAereo> prenotazioniViaggioAereo = ioPVAereo.loadData();
-        // ordino i dati nell'arraylist
+        //ordino i dati nell'arraylist
         Collections.sort(prenotazioniViaggioAereo);
-        // cancello tutto quello che era scritto nel file
+        //cancello tutto quello che era scritto nel file
         ioPVAereo.clear();
-        // riscrivo l'arrayList cancellato
+        //riscrivo l'arrayList cancellato
         ioPVAereo.saveData(prenotazioniViaggioAereo);
 
     }
 
     /**
-     * ORDINAMENTO DI UN ARRAYLIST:
-     * 
+      * metodo per ordinare un arraylist di prenotazioni dei posti sull'autobus chiamando il metodo 
+      * sort della classe Collections 
+     *
      * @throws IOException
      */
     public void sortPrenotazioniAutobus() throws IOException {
         ArrayList<PrenotazioneViaggioAutobus> prenotazioniViaggioAutobus = ioPVAutobus.loadData();
-        // ordino i dati nell'arraylist
+        //ordino i dati nell'arraylist
         Collections.sort(prenotazioniViaggioAutobus);
-        // cancello tutto quello che era scritto nel file
+        //cancello tutto quello che era scritto nel file
         ioPVAutobus.clear();
-        // riscrivo l'arrayList cancellato
+        //riscrivo l'arrayList cancellato
         ioPVAutobus.saveData(prenotazioniViaggioAutobus);
 
     }
 
     /**
-     * ORDINAMENTO DI UN ARRAYLIST:
-     * 
+      * metodo per ordinare un arraylist di prenotazioni dei posti dul treno chiamando il metodo 
+      * sort della classe Collections 
+     *
      * @throws IOException
      */
     public void sortPrenotazioniTreno() throws IOException {
         ArrayList<PrenotazioneViaggioTreno> prenotazioniViaggioTreno = ioPVTreno.loadData();
-        // ordino i dati nell'arraylist
+        //ordino i dati nell'arraylist
         Collections.sort(prenotazioniViaggioTreno);
-        // cancello tutto quello che era scritto nel file
+        //cancello tutto quello che era scritto nel file
         ioPVTreno.clear();
-        // riscrivo l'arrayList cancellato
+        //riscrivo l'arrayList cancellato
         ioPVTreno.saveData(prenotazioniViaggioTreno);
 
     }
 
     /**
-     * ORDINAMENTO DI UN ARRAYLIST:
-     * 
+      * metodo per ordinare un arraylist di tutte le prenotazioni dell'agenzia chiamando i metodi
+      * personalizzati sort di ogni tipo oggetto prenotazione
+     *
      * @throws IOException
      */
     public void sortPrenotazioniAgenzia() throws IOException {
@@ -1684,156 +1763,142 @@ public class GestioneAgenzia {
     }
 
     /**
-     * 
+     *metodo che restituisce il numero della riga in cui è presente la prenotazione come int
      * @param codice
-     * @return
+     * @return il numero della riga in cui è presente la prenotazione come int
      * @throws IOException
      */
     private int getLinePrenotazioneAlloggioHotel(int codice) throws IOException {
         boolean prenotazione_trovata = false;
         int line_prenotazione = -1;
-        // carico provisoriamnete i dati in un arraylist per fare la ricerca
+        //carico provisoriamnete i dati in un arraylist per fare la ricerca
         ArrayList<PrenotazioneAlloggioHotel> prenotazioniAlloggioHotel = ioPAHotel.loadData();
-        // controllo se il libro c'è: RICERCA PER CHIAVE
         for (int i = 0; !prenotazione_trovata && i < prenotazioniAlloggioHotel.size(); i++) {
             if (prenotazioniAlloggioHotel.get(i).getCodice() == codice) {
                 prenotazione_trovata = true;
                 line_prenotazione = i;
-                // appena trovo il libro mi interrompo
-                // in caso di elementi duplicati, elimina la prima ocorrenza
             }
         }
         return line_prenotazione;
     }
 
     /**
-     * 
+      *metodo che restituisce il numero della riga in cui è presente la prenotazione come int
      * @param codice
-     * @return
+     * @return il numero della riga in cui è presente la prenotazione come int
      * @throws IOException
      */
     private int getLinePrenotazioneAlloggioAppartamento(int codice) throws IOException {
         boolean prenotazione_trovata = false;
         int line_prenotazione = -1;
-        // carico provisoriamnete i dati in un arraylist per fare la ricerca
+        //carico provisoriamnete i dati in un arraylist per fare la ricerca
         ArrayList<PrenotazioneAlloggioAppartamento> prenotazioniAlloggioAppartamento = ioPAAppartamento.loadData();
-        // controllo se il libro c'è: RICERCA PER CHIAVE
         for (int i = 0; !prenotazione_trovata && i < prenotazioniAlloggioAppartamento.size(); i++) {
             if (prenotazioniAlloggioAppartamento.get(i).getCodice() == codice) {
                 prenotazione_trovata = true;
                 line_prenotazione = i;
-                // appena trovo il libro mi interrompo
-                // in caso di elementi duplicati, elimina la prima ocorrenza
             }
         }
         return line_prenotazione;
     }
 
     /**
-     * 
+     *metodo che restituisce il numero della riga in cui è presente la prenotazione come int
      * @param codice
-     * @return
+     * @return il numero della riga in cui è presente la prenotazione come int
      * @throws IOException
      */
     private int getLinePrenotazioneAlloggioCasaIndipendente(int codice) throws IOException {
         boolean prenotazione_trovata = false;
         int line_prenotazione = -1;
-        // carico provisoriamnete i dati in un arraylist per fare la ricerca
-        ArrayList<PrenotazioneAlloggioCasaIndipendente> prenotazioniAlloggioCasaIndipendente = ioPACasaIndipendente
-                .loadData();
-        // controllo se il libro c'è: RICERCA PER CHIAVE
+        //carico provisoriamnete i dati in un arraylist per fare la ricerca
+        ArrayList<PrenotazioneAlloggioCasaIndipendente> prenotazioniAlloggioCasaIndipendente = ioPACasaIndipendente.loadData();
         for (int i = 0; !prenotazione_trovata && i < prenotazioniAlloggioCasaIndipendente.size(); i++) {
             if (prenotazioniAlloggioCasaIndipendente.get(i).getCodice() == codice) {
                 prenotazione_trovata = true;
                 line_prenotazione = i;
-                // appena trovo il libro mi interrompo
-                // in caso di elementi duplicati, elimina la prima ocorrenza
             }
         }
         return line_prenotazione;
     }
 
     /**
-     * 
+     *metodo che restituisce il numero della riga in cui è presente la prenotazione come int
      * @param codice
-     * @return
+     * @return il numero della riga in cui è presente la prenotazione come int
      * @throws IOException
      */
     private int getLinePrenotazioneAlloggioVillaggio(int codice) throws IOException {
         boolean prenotazione_trovata = false;
         int line_prenotazione = -1;
-        // carico provisoriamnete i dati in un arraylist per fare la ricerca
+        //carico provisoriamnete i dati in un arraylist per fare la ricerca
         ArrayList<PrenotazioneAlloggioVillaggio> prenotazioniAlloggioVillaggio = ioPAVillaggio.loadData();
-        // controllo se il libro c'è: RICERCA PER CHIAVE
         for (int i = 0; !prenotazione_trovata && i < prenotazioniAlloggioVillaggio.size(); i++) {
             if (prenotazioniAlloggioVillaggio.get(i).getCodice() == codice) {
                 prenotazione_trovata = true;
                 line_prenotazione = i;
-                // appena trovo il libro mi interrompo
-                // in caso di elementi duplicati, elimina la prima ocorrenza
             }
         }
         return line_prenotazione;
     }
 
     /**
-     * 
+      *metodo che restituisce il numero della riga in cui è presente la prenotazione come int
      * @param codice
-     * @return
+     * @return il numero della riga in cui è presente la prenotazione come int
      * @throws IOException
      */
     private int getLinePrenotazioneViaggioAereo(int codice) throws IOException {
         boolean prenotazione_trovata = false;
         int line_prenotazione = -1;
-        // carico provisoriamnete i dati in un arraylist per fare la ricerca
+        //carico provisoriamnete i dati in un arraylist per fare la ricerca
         ArrayList<PrenotazioneViaggioAereo> prenotazioniViaggioAereo = ioPVAereo.loadData();
-        // controllo se il libro c'è: RICERCA PER CHIAVE
         for (int i = 0; !prenotazione_trovata && i < prenotazioniViaggioAereo.size(); i++) {
             if (prenotazioniViaggioAereo.get(i).getCodice() == codice) {
                 prenotazione_trovata = true;
                 line_prenotazione = i;
-                // appena trovo il libro mi interrompo
-                // in caso di elementi duplicati, elimina la prima ocorrenza
             }
         }
         return line_prenotazione;
     }
 
     /**
-     * 
+      *metodo che restituisce il numero della riga in cui è presente la prenotazione come int
      * @param codice
-     * @return
+     * @return il numero della riga in cui è presente la prenotazione come int
      * @throws IOException
      */
     private int getLinePrenotazioneViaggioAutobus(int codice) throws IOException {
         boolean prenotazione_trovata = false;
         int line_prenotazione = -1;
-        // carico provisoriamnete i dati in un arraylist per fare la ricerca
+        //carico provisoriamnete i dati in un arraylist per fare la ricerca
         ArrayList<PrenotazioneViaggioAutobus> prenotazioniViaggioAutobus = ioPVAutobus.loadData();
-        // controllo se il libro c'è: RICERCA PER CHIAVE
         for (int i = 0; !prenotazione_trovata && i < prenotazioniViaggioAutobus.size(); i++) {
             if (prenotazioniViaggioAutobus.get(i).getCodice() == codice) {
                 prenotazione_trovata = true;
                 line_prenotazione = i;
-                // appena trovo il libro mi interrompo
-                // in caso di elementi duplicati, elimina la prima ocorrenza
+               
             }
         }
         return line_prenotazione;
     }
-
+/**
+ *metodo che restituisce il numero della riga in cui è presente la prenotazione come int
+     * @param codice
+     * @return il numero della riga in cui è presente la prenotazione come int
+ * @throws IOException 
+ */
     private int getLinePrenotazioneViaggioTreno(int codice) throws IOException {
         boolean prenotazione_trovata = false;
         int line_prenotazione = -1;
-        // carico provisoriamnete i dati in un arraylist per fare la ricerca
+        //carico provisoriamnete i dati in un arraylist per fare la ricerca
         ArrayList<PrenotazioneViaggioTreno> prenotazioniViaggioTreno = ioPVTreno.loadData();
-        // controllo se il libro c'è: RICERCA PER CHIAVE
+       
         for (int i = 0; !prenotazione_trovata && i < prenotazioniViaggioTreno.size(); i++) {
             if (prenotazioniViaggioTreno.get(i).getCodice() == codice) {
                 prenotazione_trovata = true;
                 line_prenotazione = i;
-                // appena trovo il libro mi interrompo
-                // in caso di elementi duplicati, elimina la prima ocorrenza
+               
             }
         }
         return line_prenotazione;

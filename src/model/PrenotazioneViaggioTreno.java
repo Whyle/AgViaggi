@@ -5,7 +5,6 @@
  */
 package model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -14,9 +13,9 @@ import java.util.Objects;
  * @author jessi
  */
 public class PrenotazioneViaggioTreno extends PrenotazioneViaggio<PrenotazioneViaggioTreno> implements Comparable<PrenotazioneViaggioTreno>{
-    private static int nCodice = 0;
+    public static int nCodice = 0;
     private static int lastCodice;
-    private final int codice;//chiave
+    protected final int codice;//chiave
     protected TipoClasseMezzo tipoClasseMezzo;
     protected boolean finestrino;
     //protected boolean tavolino;
@@ -32,26 +31,11 @@ public static void setLastCodice(int lastCodice) {
     public PrenotazioneViaggioTreno(String nomeCliente, int nPasseggeri,TipoClasseMezzo tipoClasseMezzo, String LuogoPartenza, LocalDateTime dataPartenza,
             String LuogoArrivo, LocalDateTime dataArrivo, boolean finestrino) {
         super(nomeCliente, nPasseggeri, LuogoPartenza, dataPartenza, LuogoArrivo, dataArrivo);
-        this.codice=getCodice();
+        this.codice=generaNextCodice();
         this.tipoClasseMezzo = tipoClasseMezzo;
         this.finestrino = finestrino;
     }
-    /*
-    public PrenotazioneViaggioTreno(PrenotazioneViaggioTreno p) {
-        this.nomeCliente = p.nomeCliente;
-       this.LuogoPartenza = p.LuogoPartenza;
-        this.dataPartenza = p.dataPartenza;
-        this.oraPartenza = p.oraPartenza;
-        this.LuogoArrivo = p.LuogoArrivo;
-        this.dataArrivo = p.dataArrivo;
-        this.oraArrivo = p.oraArrivo;
-      this.finestrino = p.finestrino;
-        this.tipoClasseMezzo = p.tipoClasseMezzo;
-        this.codice = p.codice;
-    }    
-*/
-
-
+  
     public TipoClasseMezzo getTipoClasseMezzo() {
         return tipoClasseMezzo;
     }
@@ -69,9 +53,10 @@ public static void setLastCodice(int lastCodice) {
     }
  @Override
     public int calcolaPrezzoViaggio() {
-        int prezzo = nPasseggeri * tipoClasseMezzo.costoPerPersona;
+         int prezzo=0;
+        prezzo +=nPasseggeri * tipoClasseMezzo.costoPerPersona;
         if (this.finestrino) {
-            prezzo += 60;
+            prezzo =+ 7;
         }
         return prezzo;
     }
@@ -101,17 +86,18 @@ public static void setLastCodice(int lastCodice) {
 
      @Override
     public String toString() {
-        String stringa= "PrenotazioneViaggioTreno\n" + "codice: " + codice +super.toString()+""
+        String stringa= "\nPrenotazioneViaggioTreno\n" + "codice: " + this.codice +"\n"+super.toString()
                 + "\ntipologia classe: " + tipoClasseMezzo;
         if(!finestrino){
             stringa+="\nla prenotazione non prevede costi aggiuntivi";
         }else{
-            System.out.println("la prenotazione prevede costi aggiuntivi: ");
+            stringa+="\nla prenotazione prevede costi aggiuntivi, ovvero: ";
             if(finestrino){
-                stringa+="finestrino";
+                stringa+="\nfinestrino";
             }
         }
-        stringa+="Prezzo Soggiorno: "+calcolaPrezzoViaggio();
+        stringa+="\nPrezzo Soggiorno: "+calcolaPrezzoViaggio();
+        stringa+="\n---------------------------------\n";
         return stringa;
     }
     @Override

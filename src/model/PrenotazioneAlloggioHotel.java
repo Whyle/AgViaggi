@@ -19,7 +19,7 @@ public class PrenotazioneAlloggioHotel extends PrenotazioneAlloggio<Prenotazione
    protected boolean wifi;
    protected TipoPensione tipoPensione;
    protected TipoCamera tipoCamera;
-    private static int nCodice=0 ;//chiave
+    public static int nCodice=0 ;//chiave
     private static int lastCodice; 
    private final int codice;
 
@@ -28,24 +28,12 @@ public class PrenotazioneAlloggioHotel extends PrenotazioneAlloggio<Prenotazione
         super(nomeCliente, dataInizioSoggiorno, dataFineSoggiorno);
         this.tipoCamera = tipoCamera;
          this.tipoPensione = tipoPensione;
-        this.codice=getCodice();
+        this.codice=generaNextCodice();
         this.balcone=balcone;
         this.parcheggio=parcheggio;
         this.wifi=wifi;
     }
-    /*
-    public PrenotazioneAlloggioHotel(PrenotazioneAlloggioHotel p) {
-        this.nomeCliente = p.nomeCliente;
-        this.dataInizioSoggiorno = p.dataInizioSoggiorno;
-        this.dataFineSoggiorno = p.dataFineSoggiorno;
-        this.tipoCamera = p.tipoCamera;
-         this.tipoPensione = p.tipoPensione;
-       this.balcone=p.balcone;
-        this.parcheggio=p.parcheggio;
-        this.wifi=p.wifi;
-        this.codice = p.codice;
-    }    
-*/
+   
     public static void setLastCodice(int lastCodice) {
         PrenotazioneAlloggioHotel.lastCodice= lastCodice;
     }
@@ -53,20 +41,21 @@ public class PrenotazioneAlloggioHotel extends PrenotazioneAlloggio<Prenotazione
         return codice;
     }
    private static int generaNextCodice() {
-        return ++nCodice;
+        return nCodice++;
    }
    @Override
    public int calcolaPrezzoSoggiorno(){
-       int prezzo= (int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno) * tipoCamera.costoPerNotte;
+        int prezzo=0;
+       prezzo+= (int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno) * tipoCamera.costoPerNotte;
       prezzo+=(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno) * tipoPensione.costoGiornaliero;
        if(this.balcone){
-            prezzo+=20;
+            prezzo+=10*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
        }
        if(this.wifi){
-            prezzo+=20;
+            prezzo+=3*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
        }
        if(this.parcheggio){
-            prezzo+=5*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
+            prezzo+=8*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
        }
        return prezzo;
    }
@@ -161,23 +150,24 @@ public class PrenotazioneAlloggioHotel extends PrenotazioneAlloggio<Prenotazione
 
     @Override
     public String toString() {
-        String stringa= "PrenotazioneAlloggioHotel\n" + ", codice=" + codice +super.toString()+""
+        String stringa= "\nPrenotazioneAlloggioHotel\n" + "codice: " + this.codice +"\n"+super.toString()
                 + "\ntipologia camera: " + tipoCamera+"\ntipologia pensione: "+tipoPensione;
         if(!balcone&&!parcheggio&&!wifi){
             stringa+="\nla prenotazione non prevede costi aggiuntivi";
         }else{
-            System.out.println("la prenotazione prevede costi aggiuntivi: ");
+            stringa+="\nla prenotazione prevede costi aggiuntivi, ovvero: ";
             if(balcone){
-                stringa+="balcone";
+                stringa+="\nbalcone";
             }
             if(wifi){
-                stringa+="wifi";
+                stringa+="\nwifi";
             }
             if(parcheggio){
-                stringa+="parcheggio";
+                stringa+="\nparcheggio";
             }
         }
-        stringa+="Prezzo Soggiorno: "+calcolaPrezzoSoggiorno();
+        stringa+="\nPrezzo Soggiorno: "+calcolaPrezzoSoggiorno();
+        stringa+="\n---------------------------------\n";
         return stringa;
     }
 @Override

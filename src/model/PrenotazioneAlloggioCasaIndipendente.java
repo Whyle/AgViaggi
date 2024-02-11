@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 public class PrenotazioneAlloggioCasaIndipendente extends PrenotazioneAlloggio<PrenotazioneAlloggioCasaIndipendente> implements Comparable<PrenotazioneAlloggioCasaIndipendente>{
     private final int codice;
-    private static int nCodice = 0;//chiave
+    public static int nCodice = 0;//chiave
     private static int lastCodice;
     protected boolean animaliDomestici;
     protected boolean piscina;
@@ -29,21 +29,10 @@ public class PrenotazioneAlloggioCasaIndipendente extends PrenotazioneAlloggio<P
         this.tipoCasaIndipendente = tipoCasaIndipendente;
         this.animaliDomestici = animaliDomestici;
         this.piscina = piscina;
-        this.codice=getCodice() ;
+        this.codice=generaNextCodice() ;
     }
-    /*
-public PrenotazioneAlloggioCasaIndipendente(PrenotazioneAlloggioCasaIndipendente p) {
-        this.nomeCliente = p.nomeCliente;
-        this.dataInizioSoggiorno = p.dataInizioSoggiorno;
-        this.dataFineSoggiorno = p.dataFineSoggiorno;
-        this.tipoCasaIndipendente = p.tipoCasaIndipendente;
-       this.animaliDomestici =p. animaliDomestici;
-        this.piscina =p. piscina;
-        this.codice = p.codice;
-    }    
-*/
 private  int generaNextCodice() {
-        return ++nCodice;
+        return nCodice++;
     }
  public  int getCodice() {
         return codice;
@@ -54,15 +43,16 @@ private  int generaNextCodice() {
     }
     @Override
     public int calcolaPrezzoSoggiorno() {
-        int prezzo = (int) DAYS.between(dataInizioSoggiorno, dataFineSoggiorno) * tipoCasaIndipendente.costoPerNotte;
+         int prezzo=0;
+         prezzo += (int) DAYS.between(dataInizioSoggiorno, dataFineSoggiorno) * tipoCasaIndipendente.costoPerNotte;
         if (this.piscina) {
-            prezzo += 60;
+            prezzo += 40;
         }
         if (this.animaliDomestici) {
-            prezzo += 60;
+            prezzo += 8*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
         }
         if (this.cucina) {
-            prezzo += 60;
+            prezzo += 15*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
         }
         return prezzo;
     }
@@ -145,23 +135,24 @@ private  int generaNextCodice() {
    
      @Override
     public String toString() {
-        String stringa= "PrenotazioneAlloggioCasaIndipendente\n" + "codice: " + codice +super.toString()+""
+        String stringa= "\nPrenotazioneAlloggioCasaIndipendente\n" + "codice: " + this.codice +"\n"+super.toString()
                 + "\ntipologia casa indipendente: " + tipoCasaIndipendente;
         if(!cucina&&!piscina&&!animaliDomestici){
             stringa+="\nla prenotazione non prevede costi aggiuntivi";
         }else{
-            System.out.println("la prenotazione prevede costi aggiuntivi: ");
+            stringa+="\nla prenotazione prevede costi aggiuntivi, ovvero: ";
             if(cucina){
-                stringa+="cucina";
+                stringa+="\ncucina";
             }
             if(animaliDomestici){
-                stringa+="animali domestici";
+                stringa+="\nanimali domestici";
             }
             if(piscina){
-                stringa+="piscina";
+                stringa+="\npiscina";
             }
         }
-        stringa+="Prezzo Soggiorno: "+calcolaPrezzoSoggiorno();
+        stringa+="\nPrezzo Soggiorno: "+calcolaPrezzoSoggiorno();
+        stringa+="\n---------------------------------\n";
         return stringa;
     }
     @Override

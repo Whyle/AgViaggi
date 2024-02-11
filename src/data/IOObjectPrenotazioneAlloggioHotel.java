@@ -4,9 +4,13 @@
  * and open the template in the editor.
  */
 package data;
-import utils.DateTimeIT;
-
+import dtformatters.DateTimeIT;
+import iofiles.IOObjectFile;
+import iofiles.ReadFile;
+import iofiles.WriteFile;
+import java.io.IOException;
 import java.time.LocalDate;
+import model.PrenotazioneAlloggioAppartamento;
 import model.PrenotazioneAlloggioHotel;
 import model.TipoCamera;
 import model.TipoPensione;
@@ -22,9 +26,9 @@ public class IOObjectPrenotazioneAlloggioHotel extends IOObjectFile<Prenotazione
     }
      @Override
     public String serialize(PrenotazioneAlloggioHotel p){
-        return p.getNomeCliente()+separator+p.getTipoCamera()+
-                p.getTipoPensione()+p.getDataInizioSoggiorno().format(DateTimeIT.DATE)+separator+p.getDataFineSoggiorno().format(DateTimeIT.DATE)
-                +separator+p.getTipoCamera()+separator+p.getWifi()+separator+p.getParcheggio()
+        return p.getNomeCliente()+separator+p.getTipoCamera()+separator+
+                p.getTipoPensione()+separator+p.getDataInizioSoggiorno().format(DateTimeIT.DATE)+separator+p.getDataFineSoggiorno().format(DateTimeIT.DATE)
++separator+p.getWifi()+separator+p.getParcheggio()
                 +separator+p.getBalcone();
     }
     //array ottenuto con metodo split da riga di files

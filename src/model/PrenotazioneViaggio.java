@@ -30,6 +30,7 @@ abstract public class PrenotazioneViaggio <T>{
     public PrenotazioneViaggio(String nomeCliente,int nPasseggeri, String LuogoPartenza, 
             LocalDateTime dataPartenza, String LuogoArrivo, LocalDateTime dataArrivo) {
         this.nomeCliente = nomeCliente;
+        this.nPasseggeri=nPasseggeri;
         this.LuogoPartenza = LuogoPartenza;
         this.dataPartenza = dataPartenza;
         this.LuogoArrivo = LuogoArrivo;
@@ -133,5 +134,11 @@ abstract public class PrenotazioneViaggio <T>{
     @Override
     public PrenotazioneViaggio clone() throws CloneNotSupportedException {
         return (PrenotazioneViaggio) super.clone();
+    }
+      @Override
+    public String toString() {
+        return "\nNome Cliente: " + nomeCliente.toUpperCase()
+                + "\nData Inizio Soggiorno: " + DATE_TIME_FORMAT.format(dataPartenza)
+                + "\nData Fine Soggiorno: " + DATE_TIME_FORMAT.format(dataArrivo);
     }
 }

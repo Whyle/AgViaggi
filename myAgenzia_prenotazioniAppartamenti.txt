@@ -1,1 +1,4 @@
-Carla;MONOLOCALE;02-01-2023;02-02-2023;TRUE;FALSE;TRUE
+carla;MONOLOCALE;02-01-2021;02-02-2021;true;false;false
+marco;BILOCALE;23-02-2023;26-02-2023;false;false;false
+luca;TRILOCALE;23-05-2023;26-05-2023;false;ture;false
+gianni;BILOCALE;21-02-2023;22-02-2023;false;false;false

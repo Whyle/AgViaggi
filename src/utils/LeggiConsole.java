@@ -5,8 +5,6 @@
  */
 package utils;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 import model.TipoAppartamento;
 import model.TipoCamera;
@@ -31,7 +29,7 @@ public class LeggiConsole {
         System.out.print(messaggio);
         String valore;
         do {
-            valore = scan.nextLine();
+            valore= scan.nextLine().toUpperCase();
             if (!EnumParser.checkAppartamento(valore)) {
                 System.out.println(messaggioErrore);
             }
@@ -49,8 +47,8 @@ public class LeggiConsole {
         System.out.print(messaggio);
         String valore;
         do {
-            valore = scan.nextLine();
-            if (!EnumParser.checkCamera(valore)) {
+valore= scan.nextLine().toUpperCase();
+if (!EnumParser.checkCamera(valore)) {
                 System.out.println(messaggioErrore);
             }
         } while (!EnumParser.checkCamera(valore));
@@ -67,7 +65,7 @@ public class LeggiConsole {
         System.out.print(messaggio);
         String valore;
         do {
-            valore = scan.nextLine();
+           valore= scan.nextLine().toUpperCase();
             if (!EnumParser.checkCasaIndipendente(valore)) {
                 System.out.println(messaggioErrore);
             }
@@ -85,7 +83,7 @@ public class LeggiConsole {
         System.out.print(messaggio);
         String valore;
         do {
-            valore = scan.nextLine();
+            valore= scan.nextLine().toUpperCase();
             if (!EnumParser.checkClasseMezzo(valore)) {
                 System.out.println(messaggioErrore);
             }
@@ -103,7 +101,7 @@ public class LeggiConsole {
         System.out.print(messaggio);
         String valore;
         do {
-            valore = scan.nextLine();
+            valore= scan.nextLine().toUpperCase();
             if (!EnumParser.checkPensione(valore)) {
                 System.out.println(messaggioErrore);
             }
@@ -121,95 +119,11 @@ public class LeggiConsole {
         System.out.print(messaggio);
         String valore;
         do {
-            valore = scan.nextLine();
+            valore= scan.nextLine().toUpperCase();
             if (!EnumParser.checkStrutturaVillaggio(valore)) {
                 System.out.println(messaggioErrore);
             }
         } while (!EnumParser.checkStrutturaVillaggio(valore));
         return TipoStrutturaVillaggio.valueOf(valore);
-    }
-
-
-
-
-
-
-    public static String getStringNonVuota(String messaggio){
-        Scanner scan = new Scanner(System.in);
-        String valore;
-        do {
-            System.out.print(messaggio);
-            valore = scan.nextLine();
-            if (valore.isEmpty()) {
-                System.out.println("Il campo non può essere vuoto");
-            }
-        } while (valore.isEmpty());
-        return valore;
-    }
-
-    // dd-MM-yyyy
-    public static LocalDate getLocalDate(String messaggio, String messaggioErrore) {
-        Scanner scan = new Scanner(System.in);
-        System.out.print(messaggio);
-        String valore;
-        do {
-            valore = scan.nextLine();
-            if (!valore.matches("\\d{2}-\\d{2}-\\d{4}")) {
-                System.out.println(messaggioErrore);
-            }
-        } while (!valore.matches("\\d{2}-\\d{2}-\\d{4}"));
-        return LocalDate.parse(valore, DateTimeIT.DATE);
-    }
-
-    public static boolean getYesNo(String messaggio, String messaggioErrore) {
-        Scanner scan = new Scanner(System.in);
-        System.out.print(messaggio);
-        String valore;
-        do {
-            valore = scan.nextLine();
-            if (!valore.equalsIgnoreCase("true") && !valore.equalsIgnoreCase("false")) {
-                System.out.println(messaggioErrore);
-            }
-        } while (!valore.equalsIgnoreCase("true") && !valore.equalsIgnoreCase("false"));
-        return valore.equalsIgnoreCase("true");
-    }
-
-    public static int getInt(String messaggio, String messaggioErrore) {
-        Scanner scan = new Scanner(System.in);
-        System.out.print(messaggio);
-        String valore;
-        do {
-            valore = scan.nextLine();
-            if (!valore.matches("\\d+")) {
-                System.out.println(messaggioErrore);
-            }
-        } while (!valore.matches("\\d+"));
-        return Integer.parseInt(valore);
-    }
-
-    public static LocalDateTime getLocalDateTime(String messaggio, String messaggioErrore, String formato) {
-        Scanner scan = new Scanner(System.in);
-        System.out.print(messaggio);
-        String valore;
-        do {
-            valore = scan.nextLine();
-            if (!valore.matches(formato)) {
-                System.out.println(messaggioErrore);
-            }
-        } while (!valore.matches(formato));
-        return LocalDateTime.parse(valore, DateTimeIT.DATETIME);
-    }
-
-    public static LocalDateTime getLocalDateTimeAfter(String messaggio, String messaggioErrore, String formato, LocalDateTime dataInizio) {
-        Scanner scan = new Scanner(System.in);
-        System.out.print(messaggio);
-        String valore;
-        do {
-            valore = scan.nextLine();
-            if (!valore.matches(formato) || LocalDateTime.parse(valore).isBefore(dataInizio)) {
-                System.out.println(messaggioErrore);
-            }
-        } while (!valore.matches(formato) || LocalDateTime.parse(valore).isBefore(dataInizio));
-        return LocalDateTime.parse(valore, DateTimeIT.DATETIME);
     }
 }

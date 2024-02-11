@@ -16,7 +16,7 @@ import java.util.Objects;
 public class PrenotazioneAlloggioVillaggio extends PrenotazioneAlloggio<PrenotazioneAlloggioVillaggio> implements Comparable<PrenotazioneAlloggioVillaggio> {
 
     private final int codice ;
-    private static int nCodice = 0;//chiave  
+    public static int nCodice = 0;//chiave  
     private static int lastCodice;
     protected TipoStrutturaVillaggio tipoSrutturaVillaggio;
     protected boolean cucina;
@@ -28,28 +28,16 @@ public class PrenotazioneAlloggioVillaggio extends PrenotazioneAlloggio<Prenotaz
             LocalDate dataInizioSoggiorno, LocalDate dataFineSoggiorno,
             boolean cucina, boolean parcheggio, boolean animaliDomestici, boolean animazione) {
         super(nomeCliente, dataInizioSoggiorno, dataFineSoggiorno);
-        this.codice=getCodice() ;
+        this.codice=generaNextCodice() ;
         this.tipoSrutturaVillaggio = tipoSrutturaVillaggio;
         this.cucina = cucina;
         this.parcheggio = parcheggio;
         this.animaliDomestici = animaliDomestici;
         this.animazione = animazione;
     }
-    /*
-     public PrenotazioneAlloggioVillaggio(PrenotazioneAlloggioVillaggio p) {
-        this.nomeCliente = p.nomeCliente;
-        this.dataInizioSoggiorno = p.dataInizioSoggiorno;
-        this.dataFineSoggiorno = p.dataFineSoggiorno;
-        this.tipoSrutturaVillaggio = p.tipoSrutturaVillaggio;
-      this.cucina =p. cucina;
-        this.parcheggio = p.parcheggio;
-        this.animaliDomestici =p. animaliDomestici;
-        this.animazione = p.animazione;
-        this.codice = p.codice;
-    }    
-*/
+  
     private int generaNextCodice() {
-        return ++nCodice;
+        return nCodice++;
     }
   public  int getCodice() {
         return codice;
@@ -59,18 +47,19 @@ public class PrenotazioneAlloggioVillaggio extends PrenotazioneAlloggio<Prenotaz
     }
     @Override
     public int calcolaPrezzoSoggiorno() {
-        int prezzo = (int) DAYS.between(dataInizioSoggiorno, dataFineSoggiorno) * tipoSrutturaVillaggio.costoPerNotte;
+         int prezzo=0;
+        prezzo += (int) DAYS.between(dataInizioSoggiorno, dataFineSoggiorno) * tipoSrutturaVillaggio.costoPerNotte;
         if (this.animazione) {
-            prezzo += 60;
+            prezzo += 20*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
         }
         if (this.animaliDomestici) {
-            prezzo += 60;
+            prezzo += 5*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
         }
         if (this.cucina) {
-            prezzo += 60;
+            prezzo += 15*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
         }
         if (this.parcheggio) {
-            prezzo += 60;
+            prezzo += 8*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
         }
         return prezzo;
     }
@@ -166,26 +155,27 @@ public class PrenotazioneAlloggioVillaggio extends PrenotazioneAlloggio<Prenotaz
     }
     @Override
     public String toString() {
-        String stringa= "PrenotazioneAlloggioVillaggio\n" + "codice: " + codice +super.toString()+""
+        String stringa= "\nPrenotazioneAlloggioVillaggio\n" + "codice: " + this.codice +"\n"+super.toString()
                 + "\ntipologia sruttura abitazione nel villaggio: " + tipoSrutturaVillaggio;
         if(!cucina&&!parcheggio&&!animaliDomestici&&!animazione){
             stringa+="\nla prenotazione non prevede costi aggiuntivi";
         }else{
-            System.out.println("la prenotazione prevede costi aggiuntivi: ");
+            stringa+="\nla prenotazione prevede costi aggiuntivi, ovvero: ";
             if(cucina){
-                stringa+="cucina";
+                stringa+="\ncucina";
             }
             if(animaliDomestici){
-                stringa+="animali domestici";
+                stringa+="\nanimali domestici";
             }
             if(parcheggio){
-                stringa+="parcheggio";
+                stringa+="\nparcheggio";
             }
             if(animazione){
-                stringa+="animazione";
+                stringa+="\nanimazione";
             }
         }
-        stringa+="Prezzo Soggiorno: "+calcolaPrezzoSoggiorno();
+        stringa+="\nPrezzo Soggiorno: "+calcolaPrezzoSoggiorno();
+        stringa+="\n---------------------------------\n";
         return stringa;
     }
     @Override

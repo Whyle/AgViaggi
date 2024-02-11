@@ -20,7 +20,7 @@ public enum TipoClasseMezzo {
     private TipoClasseMezzo(int costoPerPersona) {
         this.costoPerPersona = costoPerPersona;
     }
-    
+
     public static String listOfConstants() {
         TipoClasseMezzo[] values = TipoClasseMezzo.values();
         String res = "";
