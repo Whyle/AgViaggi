@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Objects;
+
 /**
  *
  * @author jessi
@@ -19,20 +20,24 @@ abstract public class PrenotazioneAlloggio<T> implements Cloneable {
     protected LocalDate dataInizioSoggiorno;
     protected LocalDate dataFineSoggiorno;
     private static final DateTimeFormatter DATE_FRMT = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.ITALY);
+
     public PrenotazioneAlloggio(String nomeCliente, LocalDate dataInizioSoggiorno, LocalDate dataFineSoggiorno) {
         this.nomeCliente = nomeCliente;
         this.dataInizioSoggiorno = dataInizioSoggiorno;
         this.dataFineSoggiorno = dataFineSoggiorno;
     }
-    public PrenotazioneAlloggio(PrenotazioneAlloggio pA) {
+
+    public PrenotazioneAlloggio(PrenotazioneAlloggio<T> pA) {
         this.nomeCliente = pA.nomeCliente;
         this.dataInizioSoggiorno = pA.dataInizioSoggiorno;
         this.dataFineSoggiorno = pA.dataFineSoggiorno;
     }
-public String getNomeCliente() {
+
+    public String getNomeCliente() {
         return nomeCliente;
     }
- public void setNomeCliente(String nomeCliente) {
+
+    public void setNomeCliente(String nomeCliente) {
         this.nomeCliente = nomeCliente;
     }
 
@@ -51,8 +56,6 @@ public String getNomeCliente() {
     public void setDataFineSoggiorno(LocalDate dataFineSoggiorno) {
         this.dataFineSoggiorno = dataFineSoggiorno;
     }
-    
- 
 
     @Override
     public int hashCode() {
@@ -88,12 +91,12 @@ public String getNomeCliente() {
     }
 
     /**
-     *metodo astratto che ovverraiderà la classe figlia
+     * metodo astratto che ovverraiderà la classe figlia
+     * 
      * @param object
      * @return
      */
     abstract public int compareTo(T object);
-    
 
     @Override
     public String toString() {
@@ -101,12 +104,14 @@ public String getNomeCliente() {
                 + "\nData Inizio Soggiorno: " + DATE_FRMT.format(dataInizioSoggiorno)
                 + "\nData Fine Soggiorno: " + DATE_FRMT.format(dataFineSoggiorno);
     }
+
     /////////////// clone /////////////
     @Override
-    public PrenotazioneAlloggio clone() throws CloneNotSupportedException{
-        return (PrenotazioneAlloggio)super.clone();
+    public PrenotazioneAlloggio clone() throws CloneNotSupportedException {
+        return (PrenotazioneAlloggio) super.clone();
     }
+
     ////////////////////////////
-     abstract public int calcolaPrezzoSoggiorno();
+    abstract public int calcolaPrezzoSoggiorno();
 
 }

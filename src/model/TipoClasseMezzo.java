@@ -14,7 +14,6 @@ public enum TipoClasseMezzo {
     BUSINESS(60),
     ECONOMY(40);
 
-
     public final int costoPerPersona;
 
     private TipoClasseMezzo(int costoPerPersona) {
@@ -25,10 +24,10 @@ public enum TipoClasseMezzo {
         TipoClasseMezzo[] values = TipoClasseMezzo.values();
         String res = "";
         int i;
-        for ( i = 0; i < values.length-1; i++) {
-            res += values[i].name()+", ";
+        for (i = 0; i < values.length - 1; i++) {
+            res += values[i].name() + ", ";
         }
-        res+=values[i];
+        res += values[i];
         return res;
     }
 }

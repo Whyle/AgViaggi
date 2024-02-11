@@ -5,7 +5,6 @@
  */
 package model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -15,22 +14,21 @@ import java.util.Objects;
  *
  * @author jessi
  */
-abstract public class PrenotazioneViaggio <T>{
+abstract public class PrenotazioneViaggio<T> {
     protected String nomeCliente;
     protected int nPasseggeri;
     protected String LuogoPartenza;
     protected LocalDateTime dataPartenza;
     protected String LuogoArrivo;
     protected LocalDateTime dataArrivo;
-    
-    protected static final DateTimeFormatter DATE_TIME_FORMAT
-            = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm", Locale.ITALY);
 
-    
-    public PrenotazioneViaggio(String nomeCliente,int nPasseggeri, String LuogoPartenza, 
+    protected static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm",
+            Locale.ITALY);
+
+    public PrenotazioneViaggio(String nomeCliente, int nPasseggeri, String LuogoPartenza,
             LocalDateTime dataPartenza, String LuogoArrivo, LocalDateTime dataArrivo) {
         this.nomeCliente = nomeCliente;
-        this.nPasseggeri=nPasseggeri;
+        this.nPasseggeri = nPasseggeri;
         this.LuogoPartenza = LuogoPartenza;
         this.dataPartenza = dataPartenza;
         this.LuogoArrivo = LuogoArrivo;
@@ -69,7 +67,6 @@ abstract public class PrenotazioneViaggio <T>{
         this.dataPartenza = dataPartenza;
     }
 
-  
     public String getLuogoArrivo() {
         return LuogoArrivo;
     }
@@ -86,9 +83,7 @@ abstract public class PrenotazioneViaggio <T>{
         this.dataArrivo = dataArrivo;
     }
 
-   
-    
-      abstract public int calcolaPrezzoViaggio();
+    abstract public int calcolaPrezzoViaggio();
 
     @Override
     public int hashCode() {
@@ -130,15 +125,19 @@ abstract public class PrenotazioneViaggio <T>{
         }
         return true;
     }
+
     abstract public int compareTo(T object);
+
     @Override
     public PrenotazioneViaggio clone() throws CloneNotSupportedException {
         return (PrenotazioneViaggio) super.clone();
     }
-      @Override
+
+    @Override
     public String toString() {
-        return "\nNome Cliente: " + nomeCliente.toUpperCase()
-                + "\nData Inizio Soggiorno: " + DATE_TIME_FORMAT.format(dataPartenza)
-                + "\nData Fine Soggiorno: " + DATE_TIME_FORMAT.format(dataArrivo);
+        return "\nNome Cliente: " + nomeCliente.toUpperCase() +
+                "\nData Inizio Soggiorno: " + DATE_TIME_FORMAT.format(dataPartenza) +
+                "\nData Fine Soggiorno: " + DATE_TIME_FORMAT.format(dataArrivo);
     }
+
 }

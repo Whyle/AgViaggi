@@ -5,7 +5,6 @@
  */
 package model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -13,29 +12,27 @@ import java.util.Objects;
  *
  * @author jessi
  */
-public class PrenotazioneViaggioAereo extends PrenotazioneViaggio<PrenotazioneViaggioAereo> implements Comparable<PrenotazioneViaggioAereo>{
-    
-    public static int nCodice = 0;
-    private static int lastCodice;
-    private final int codice;//chiave
-    protected boolean bagaglio;
-    TipoClasseMezzo tipoClasseMezzo;
-    private int generaNextCodice() {
-        return nCodice++;
-    }
-    public  int getCodice() {
+public class PrenotazioneViaggioAereo extends PrenotazioneViaggio<PrenotazioneViaggioAereo>
+        implements Comparable<PrenotazioneViaggioAereo> {
+
+    private TipoClasseMezzo tipoClasseMezzo;
+
+    private int codice;// chiave
+    private boolean bagaglio;
+
+    public int getCodice() {
         return codice;
     }
-public static void setLastCodice(int lastCodice) {
-        PrenotazioneViaggioAereo.lastCodice= lastCodice;
-    }
-    public PrenotazioneViaggioAereo(String nomeCliente,int nPasseggeri, 
-            TipoClasseMezzo tipoClasseMezzo , String LuogoPartenza, LocalDateTime dataPartenza, String LuogoArrivo, LocalDateTime dataArrivo, boolean bagaglio) {
-        super(nomeCliente, nPasseggeri, LuogoPartenza, dataPartenza,  LuogoArrivo, dataArrivo);
-        this.codice=generaNextCodice();
+
+    public PrenotazioneViaggioAereo(int codice, String nomeCliente, int nPasseggeri,
+            TipoClasseMezzo tipoClasseMezzo, String LuogoPartenza, LocalDateTime dataPartenza, String LuogoArrivo,
+            LocalDateTime dataArrivo, boolean bagaglio) {
+        super(nomeCliente, nPasseggeri, LuogoPartenza, dataPartenza, LuogoArrivo, dataArrivo);
+        this.codice = codice;
         this.bagaglio = bagaglio;
         this.tipoClasseMezzo = tipoClasseMezzo;
     }
+
     public TipoClasseMezzo getTipoClasseMezzo() {
         return tipoClasseMezzo;
     }
@@ -84,36 +81,45 @@ public static void setLastCodice(int lastCodice) {
         }
         return true;
     }
-@Override
+
+    @Override
     public int calcolaPrezzoViaggio() {
-         int prezzo=0;
-       prezzo +=nPasseggeri * tipoClasseMezzo.costoPerPersona;
+        int prezzo = 0;
+        prezzo += nPasseggeri * tipoClasseMezzo.costoPerPersona;
         if (this.bagaglio) {
             prezzo += 50;
         }
         return prezzo;
     }
+
     @Override
     public String toString() {
-        String stringa= "\nPrenotazioneViaggioAereo\n" + "codice: " + this.codice +"\n"+super.toString()
-                + "\ntipologia classe: " + tipoClasseMezzo;
-        if(!bagaglio){
-            stringa+="\nla prenotazione non prevede costi aggiuntivi";
-        }else{
-            stringa+="\nla prenotazione prevede costi aggiuntivi, ovvero: ";
-            if(bagaglio){
-                stringa+="\nbagaglio";
+        String stringa = "\nPrenotazione Viaggio Aereo\n" +
+                "Codice: " + this.codice + "\n" +
+                super.toString() + "\n" +
+                "Tipologia classe: " + tipoClasseMezzo;
+
+        if (!bagaglio) {
+            stringa += "\nLa prenotazione non prevede costi aggiuntivi";
+        } else {
+            stringa += "\nLa prenotazione prevede costi aggiuntivi, ovvero: ";
+            if (bagaglio) {
+                stringa += "\n- Bagaglio";
             }
         }
-        stringa+="\nPrezzo Soggiorno: "+calcolaPrezzoViaggio();
-        stringa+="\n---------------------------------\n";
+
+        stringa += "\nPrezzo Soggiorno: " + calcolaPrezzoViaggio();
+        stringa += "\n---------------------------------\n";
+
         return stringa;
     }
+
     @Override
     public int compareTo(PrenotazioneViaggioAereo pA) {
         // ordinamento per codice crescente
         return this.codice - pA.codice;
     }
+
     @Override
     public PrenotazioneViaggioAereo clone() throws CloneNotSupportedException {
         return (PrenotazioneViaggioAereo) super.clone();

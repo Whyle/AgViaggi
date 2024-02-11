@@ -15,21 +15,20 @@ public enum TipoStrutturaVillaggio {
     BUNGALOW(150),
     TENDA(180);
 
-
     public final int costoPerNotte;
 
     private TipoStrutturaVillaggio(int costoPerNotte) {
         this.costoPerNotte = costoPerNotte;
     }
-    
+
     public static String listOfConstants() {
         TipoStrutturaVillaggio[] values = TipoStrutturaVillaggio.values();
         String res = "";
         int i;
-        for ( i = 0; i < values.length-1; i++) {
-            res += values[i].name()+", ";
+        for (i = 0; i < values.length - 1; i++) {
+            res += values[i].name() + ", ";
         }
-        res+=values[i];
+        res += values[i];
         return res;
     }
 }

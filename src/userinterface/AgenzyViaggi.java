@@ -17,32 +17,50 @@ import logic.GestioneAgenzia;
  */
 public class AgenzyViaggi {
 
-    public static void printMenu() {
+    public static final String fileAgenzia = "myAgenzia";
+    public static final String sep = ";";
 
+    public static void printMenu() {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
         System.out.println("---------------------------------------------------");
-        System.out.println("BENVENUTO/A NELLA NOSTRA AGENZIA! Quale azione scegli? ");
-        System.out.println("1 --> INSERISCI PRENOTAZIONE DI UN ALLOGGIO (hotel / appartamento / casa indipendente / strutture nel villaggio)");
-        System.out.println("2 --> INSERISCI PRENOTAZIONE DI UN MEZZO DI TRASPORTO (treno / aereo / autobus)");
-        System.out.println("3 --> MODIFICA PRENOTAZIONE DI UN ALLOGGIO (per codice) ");
-        System.out.println("4 --> MODIFICA PRENOTAZIONE DI UN MEZZO DI TRASPORTO (per codice) ");
-        System.out.println("5 --> RICERCA PRENOTAZIONE DI UNA TIPOLOGIA DI ALLOGGIO (per codice)  ");
-        System.out.println("6 --> RICERCA PRENOTAZIONE DI UNA TIPOLOGIA DI MEZZO DI TRASPORTO (per codice)  ");
+        System.out.println("           BENVENUTO/A NELLA NOSTRA AGENZIA!       ");
+        System.out.println("---------------------------------------------------");
+        System.out.println("1 --> INSERISCI PRENOTAZIONE DI UN ALLOGGIO");
+        System.out.println("2 --> INSERISCI PRENOTAZIONE DI UN MEZZO DI TRASPORTO");
+        System.out.println("---------------------------------------------------");
+        System.out.println("3 --> MODIFICA PRENOTAZIONE DI UN ALLOGGIO (per codice)");
+        System.out.println("4 --> MODIFICA PRENOTAZIONE DI UN MEZZO DI TRASPORTO (per codice)");
+        System.out.println("---------------------------------------------------");
+        System.out.println("5 --> RICERCA PRENOTAZIONE DI UNA TIPOLOGIA DI ALLOGGIO (per codice)");
+        System.out.println("6 --> RICERCA PRENOTAZIONE DI UNA TIPOLOGIA DI MEZZO DI TRASPORTO (per codice)");
+        System.out.println("---------------------------------------------------");
         System.out.println("7 --> ELIMINA PRENOTAZIONE DI UNA TIPOLOGIA DI ALLOGGIO (per codice)");
-        System.out.println("8-->  ELIMINA PRENOTAZIONE DI UNA TIPOLOGIA DI MEZZO DI TRASPORTO (per codice)");
-        System.out.println("9 --> STAMPA PRENOTAZIONI DI UNA TIPOLOGIA DI ALLOGGIO");
-        System.out.println("10--> STAMPA PRENOTAZIONI DI UNA TIPOLOGIA DI MEZZO DI TRASPORTO"); 
-        System.out.println("11--> STAMPA TUTTE LE PRENOTAZIONI (DIVISE PER CATEGORIA) ");
-        System.out.println("12--> VERIFICA DISPONIBILITÀ DI UN ALLOGGIO");
-        System.out.println("13--> VERIFICA DISPONIBILITÀ DI UN MEZZO DI TRASPORTO");
-        System.out.println("14--> ORDINA PRENOTAZIONI DI UNA TIPOLOGIA DI ALLOGGIO (ordine cronologico di effettuazione della prenotazione)");
-        System.out.println("15--> ORDINA PRENOTAZIONI DI UNA TIPOLOGIA DI MEZZO DI TRASPORTO (ordine cronologico di effettuazione della prenotazione)");
-        System.out.println("16--> ORDINA TUTTE LE PRENOTAZIONI DIVISE PER CATEGORIA (le prenotazioni di ogni categoria verranno ordinate in ordine cronologico)");
-        System.out.println("17--> CALCOLARE L'INCASSO ANNUALE TOTALE ALLOGGI (tutti i tipi di alloggio)");
-        System.out.println("18--> CALCOLARE L'INCASSO ANNUALE TOTALE GUADAGNATO SOLO GRAZIE AI MEZZI DI TRASPORTO (tutti i tipi di mezzo)");
-        System.out.println("19--> CALCOLARE L'INCASSO ANNUALE TOTALE  (alloggi+mezzi di trasporto)");
-        System.out.println("20--> VISUALIZZARE LA PRINCIPALE FONTE DI GUADAGNO ANNUALE");
-        System.out.println("0-->  PER TERMINARE");
+        System.out.println("8 --> ELIMINA PRENOTAZIONE DI UNA TIPOLOGIA DI MEZZO DI TRASPORTO (per codice)");
         System.out.println("---------------------------------------------------");
+        System.out.println("9 --> STAMPA PRENOTAZIONI DI UNA TIPOLOGIA DI ALLOGGIO");
+        System.out.println("10 --> STAMPA PRENOTAZIONI DI UNA TIPOLOGIA DI MEZZO DI TRASPORTO");
+        System.out.println("11 --> STAMPA TUTTE LE PRENOTAZIONI (DIVISE PER CATEGORIA)");
+        System.out.println("---------------------------------------------------");
+        System.out.println("12 --> VERIFICA DISPONIBILITÀ DI UN ALLOGGIO");
+        System.out.println("13 --> VERIFICA DISPONIBILITÀ DI UN MEZZO DI TRASPORTO");
+        System.out.println("---------------------------------------------------");
+        System.out.println("14 --> ORDINA PRENOTAZIONI DI UNA TIPOLOGIA DI ALLOGGIO (ordine cronologico)");
+        System.out.println("15 --> ORDINA PRENOTAZIONI DI UNA TIPOLOGIA DI MEZZO DI TRASPORTO (ordine cronologico)");
+        System.out.println("16 --> ORDINA TUTTE LE PRENOTAZIONI DIVISE PER CATEGORIA (ordine cronologico)");
+        System.out.println("---------------------------------------------------");
+        System.out.println("17 --> CALCOLARE L'INCASSO ANNUALE TOTALE ALLOGGI");
+        System.out.println("18 --> CALCOLARE L'INCASSO ANNUALE TOTALE GUADAGNATO SOLO GRAZIE AI MEZZI DI TRASPORTO");
+        System.out.println("19 --> CALCOLARE L'INCASSO ANNUALE TOTALE (alloggi + mezzi di trasporto)");
+        System.out.println("20 --> VISUALIZZARE LA PRINCIPALE FONTE DI GUADAGNO ANNUALE");
+        System.out.println("---------------------------------------------------");
+        System.out.println("0 --> PER TERMINARE");
+        System.out.println("---------------------------------------------------");
+
     }
 
     /**
@@ -50,28 +68,25 @@ public class AgenzyViaggi {
      */
     public static void main(String[] args) {
         try {
-            // TODO code application logic here
-
-            String fileAgenzia = "myAgenzia";
-            String sep = ";";
             GestioneAgenzia ga = new GestioneAgenzia(fileAgenzia, sep);
             TestAgenzia ta = new TestAgenzia(ga);
-
             Scanner scan = new Scanner(System.in);
             String s;
 
             do {
                 printMenu();
+                System.out.println("Inserisci un'opzione: ");
                 s = scan.nextLine();
-                if (!s.equals("0")) {
 
+                if (!s.equals("0")) {
                     switch (s) {
-                        case "1":
-                            System.out.println("di che tipologia di alloggio ti vuoi occupare?(1.HOTEL 2.APPARTAMENTO 3.CASA INDIPENDENTE 4.STRUTTURE NEL VILLAGGIO)");
+                        case "1": // inserisci prenotazione alloggio
+                            System.out.println(
+                                    "Di che tipologia di alloggio ti vuoi occupare?[1.HOTEL 2.APPARTAMENTO 3.CASA INDIPENDENTE 4.STRUTTURE NEL VILLAGGIO]");
                             String sceltaTipologiaAlloggio;
                             sceltaTipologiaAlloggio = scan.nextLine();
                             switch (sceltaTipologiaAlloggio) {
-                                case "1":
+                                case "1": // hotel
                                     ta.inserisciPrenotazioneAlloggioHotel();
                                     break;
                                 case "2":
@@ -90,7 +105,8 @@ public class AgenzyViaggi {
                             }
                             break;
                         case "2":
-                            System.out.println("di che tipologia di mezzo ti vuoi occupare?(1.TRENO 2.AEREO 3. AUTOBUS )");
+                            System.out.println(
+                                    "di che tipologia di mezzo ti vuoi occupare?(1.TRENO 2.AEREO 3. AUTOBUS )");
                             String sceltaTipologiaMezzo;
                             sceltaTipologiaMezzo = scan.nextLine();
                             switch (sceltaTipologiaMezzo.toUpperCase()) {
@@ -110,7 +126,8 @@ public class AgenzyViaggi {
                             }
                             break;
                         case "3":
-                            System.out.println("di che tipologia di alloggio ti vuoi occupare?(1.HOTEL 2.APPARTAMENTO 3.CASA INDIPENDENTE 4.STRUTTURE NEL VILLAGGIO)");
+                            System.out.println(
+                                    "di che tipologia di alloggio ti vuoi occupare?(1.HOTEL 2.APPARTAMENTO 3.CASA INDIPENDENTE 4.STRUTTURE NEL VILLAGGIO)");
 
                             sceltaTipologiaAlloggio = scan.nextLine();
                             switch (sceltaTipologiaAlloggio.toUpperCase()) {
@@ -133,7 +150,8 @@ public class AgenzyViaggi {
                             }
                             break;
                         case "4":
-                            System.out.println("di che tipologia di mezzo ti vuoi occupare?(1.TRENO 2.AEREO 3. AUTOBUS )");
+                            System.out.println(
+                                    "di che tipologia di mezzo ti vuoi occupare?(1.TRENO 2.AEREO 3. AUTOBUS )");
 
                             sceltaTipologiaMezzo = scan.nextLine();
                             switch (sceltaTipologiaMezzo.toUpperCase()) {
@@ -153,7 +171,8 @@ public class AgenzyViaggi {
                             }
                             break;
                         case "5":
-                            System.out.println("di che tipologia di alloggio ti vuoi occupare?(1.HOTEL 2.APPARTAMENTO 3.CASA INDIPENDENTE 4.STRUTTURE NEL VILLAGGIO)");
+                            System.out.println(
+                                    "di che tipologia di alloggio ti vuoi occupare?(1.HOTEL 2.APPARTAMENTO 3.CASA INDIPENDENTE 4.STRUTTURE NEL VILLAGGIO)");
 
                             sceltaTipologiaAlloggio = scan.nextLine();
                             switch (sceltaTipologiaAlloggio.toUpperCase()) {
@@ -176,7 +195,8 @@ public class AgenzyViaggi {
                             }
                             break;
                         case "6":
-                            System.out.println("di che tipologia di mezzo ti vuoi occupare?(1.TRENO 2.AEREO 3. AUTOBUS )");
+                            System.out.println(
+                                    "di che tipologia di mezzo ti vuoi occupare?(1.TRENO 2.AEREO 3. AUTOBUS )");
 
                             sceltaTipologiaMezzo = scan.nextLine();
                             switch (sceltaTipologiaMezzo.toUpperCase()) {
@@ -196,7 +216,8 @@ public class AgenzyViaggi {
                             }
                             break;
                         case "7":
-                            System.out.println("di che tipologia di alloggio ti vuoi occupare?(1.HOTEL 2.APPARTAMENTO 3.CASA INDIPENDENTE 4.STRUTTURE NEL VILLAGGIO)");
+                            System.out.println(
+                                    "di che tipologia di alloggio ti vuoi occupare?(1.HOTEL 2.APPARTAMENTO 3.CASA INDIPENDENTE 4.STRUTTURE NEL VILLAGGIO)");
 
                             sceltaTipologiaAlloggio = scan.nextLine();
                             switch (sceltaTipologiaAlloggio.toUpperCase()) {
@@ -217,10 +238,11 @@ public class AgenzyViaggi {
                                     System.out.println("scelta non valida, inserire un'altra opzione");
                                     break;
                             }
-                       
+
                             break;
                         case "8":
-                            System.out.println("di che tipologia di mezzo ti vuoi occupare?(1.TRENO 2.AEREO 3. AUTOBUS )");
+                            System.out.println(
+                                    "di che tipologia di mezzo ti vuoi occupare?(1.TRENO 2.AEREO 3. AUTOBUS )");
 
                             sceltaTipologiaMezzo = scan.nextLine();
                             switch (sceltaTipologiaMezzo.toUpperCase()) {
@@ -240,7 +262,8 @@ public class AgenzyViaggi {
                             }
                             break;
                         case "9":
-                            System.out.println("di che tipologia di alloggio ti vuoi occupare?(1.HOTEL 2.APPARTAMENTO 3.CASA INDIPENDENTE 4.STRUTTURE NEL VILLAGGIO)");
+                            System.out.println(
+                                    "di che tipologia di alloggio ti vuoi occupare?(1.HOTEL 2.APPARTAMENTO 3.CASA INDIPENDENTE 4.STRUTTURE NEL VILLAGGIO)");
 
                             sceltaTipologiaAlloggio = scan.nextLine();
                             switch (sceltaTipologiaAlloggio.toUpperCase()) {
@@ -263,7 +286,8 @@ public class AgenzyViaggi {
                             }
                             break;
                         case "10":
-                            System.out.println("di che tipologia di mezzo ti vuoi occupare?(1.TRENO 2.AEREO 3. AUTOBUS )");
+                            System.out.println(
+                                    "di che tipologia di mezzo ti vuoi occupare?(1.TRENO 2.AEREO 3. AUTOBUS )");
 
                             sceltaTipologiaMezzo = scan.nextLine();
                             switch (sceltaTipologiaMezzo.toUpperCase()) {
@@ -283,12 +307,13 @@ public class AgenzyViaggi {
                             }
                             break;
                         case "11":
-                            
-                           ta.stampaListaPrenotazioniAgenzia();
+
+                            ta.stampaListaPrenotazioniAgenzia();
                             break;
-                           
-                             case "12":
-                            System.out.println("di che tipologia di alloggio ti vuoi occupare?(1.HOTEL 2.APPARTAMENTO 3.CASA INDIPENDENTE 4.STRUTTURE NEL VILLAGGIO)");
+
+                        case "12":
+                            System.out.println(
+                                    "di che tipologia di alloggio ti vuoi occupare?(1.HOTEL 2.APPARTAMENTO 3.CASA INDIPENDENTE 4.STRUTTURE NEL VILLAGGIO)");
 
                             sceltaTipologiaAlloggio = scan.nextLine();
                             switch (sceltaTipologiaAlloggio.toUpperCase()) {
@@ -311,7 +336,8 @@ public class AgenzyViaggi {
                             }
                             break;
                         case "13":
-                             System.out.println("di che tipologia di mezzo ti vuoi occupare?(1.TRENO 2.AEREO 3. AUTOBUS )");
+                            System.out.println(
+                                    "di che tipologia di mezzo ti vuoi occupare?(1.TRENO 2.AEREO 3. AUTOBUS )");
 
                             sceltaTipologiaMezzo = scan.nextLine();
                             switch (sceltaTipologiaMezzo.toUpperCase()) {
@@ -330,8 +356,9 @@ public class AgenzyViaggi {
                                     break;
                             }
                             break;
-                             case "14":
-                             System.out.println("di che tipologia di alloggio ti vuoi occupare?(1.HOTEL 2.APPARTAMENTO 3.CASA INDIPENDENTE 4.STRUTTURE NEL VILLAGGIO)");
+                        case "14":
+                            System.out.println(
+                                    "di che tipologia di alloggio ti vuoi occupare?(1.HOTEL 2.APPARTAMENTO 3.CASA INDIPENDENTE 4.STRUTTURE NEL VILLAGGIO)");
 
                             sceltaTipologiaAlloggio = scan.nextLine();
                             switch (sceltaTipologiaAlloggio.toUpperCase()) {
@@ -353,9 +380,10 @@ public class AgenzyViaggi {
                                     break;
                             }
                             break;
-                             
-                             case "15":
-                                  System.out.println("di che tipologia di mezzo ti vuoi occupare?(1.TRENO 2.AEREO 3. AUTOBUS )");
+
+                        case "15":
+                            System.out.println(
+                                    "di che tipologia di mezzo ti vuoi occupare?(1.TRENO 2.AEREO 3. AUTOBUS )");
 
                             sceltaTipologiaMezzo = scan.nextLine();
                             switch (sceltaTipologiaMezzo.toUpperCase()) {
@@ -374,29 +402,28 @@ public class AgenzyViaggi {
                                     break;
                             }
                             break;
-                                 
-                             case "16":
+
+                        case "16":
                             ta.sortPrenotazioniAgenzia();
                             break;
-                             case "17":
-                                 ta.calcolaIncassoAnnualeTotaleAlloggi();
-                                 break;
-                             
-                             case "18":
-                                 ta.calcolaIncassoAnnualeTotaleMezziTrasporto();
-                                 break;
-                                 
-                       
-                        case "19": 
-                           
-                            ta.calcolaIncassoAnnualeTotaleAgenzia();
-                        
-                        break;
+                        case "17":
+                            ta.calcolaIncassoAnnualeTotaleAlloggi();
+                            break;
 
-                        case "20": 
+                        case "18":
+                            ta.calcolaIncassoAnnualeTotaleMezziTrasporto();
+                            break;
+
+                        case "19":
+
+                            ta.calcolaIncassoAnnualeTotaleAgenzia();
+
+                            break;
+
+                        case "20":
                             ta.TrovaFonteMaxGuadagnoAnnuale();
-                        break;
-                       
+                            break;
+
                         default:
                             System.out.println("opzione non in menù, scegli un'altra opzione.");
                             break;

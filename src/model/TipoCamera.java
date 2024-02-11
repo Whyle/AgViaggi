@@ -10,7 +10,7 @@ package model;
  * @author jessi
  */
 public enum TipoCamera {
-     SINGOLA(80),
+    SINGOLA(80),
     DOPPIA(120),
     TRIPLA(150),
     QUADRUPLA(180);
@@ -20,15 +20,15 @@ public enum TipoCamera {
     private TipoCamera(int costoPerNotte) {
         this.costoPerNotte = costoPerNotte;
     }
-    
+
     public static String listOfConstants() {
         TipoCamera[] values = TipoCamera.values();
         String res = "";
         int i;
-        for ( i = 0; i < values.length-1; i++) {
-            res += values[i].name()+", ";
+        for (i = 0; i < values.length - 1; i++) {
+            res += values[i].name() + ", ";
         }
-        res+=values[i];
+        res += values[i];
         return res;
     }
 }

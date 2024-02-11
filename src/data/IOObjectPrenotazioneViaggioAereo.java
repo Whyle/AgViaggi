@@ -28,7 +28,7 @@ public class IOObjectPrenotazioneViaggioAereo extends IOObjectFile<PrenotazioneV
 
    @Override
      public String serialize(PrenotazioneViaggioAereo p){
-        return p.getNomeCliente()+separator+p.getnPasseggeri()+separator+p.getTipoClasseMezzo()+
+        return p.getCodice() + separator + p.getNomeCliente()+separator+p.getnPasseggeri()+separator+p.getTipoClasseMezzo()+
                 separator+p.getLuogoPartenza()+separator+p.getDataPartenza().format(DateTimeIT.DATETIME)
                 +separator+p.getLuogoArrivo()+separator+p.
                         getDataArrivo().format(DateTimeIT.DATETIME)+separator+p.getBagaglio();
@@ -36,10 +36,10 @@ public class IOObjectPrenotazioneViaggioAereo extends IOObjectFile<PrenotazioneV
     //array ottenuto con metodo split da riga di files
      @Override
     public PrenotazioneViaggioAereo deserialize(String[]attributes){
-       return new PrenotazioneViaggioAereo(attributes[0],Integer.parseInt(attributes[1]),
-       TipoClasseMezzo.valueOf(attributes[2]),(attributes[3]),LocalDateTime.parse(attributes[4], DateTimeIT.DATETIME),
-             attributes[5],LocalDateTime.parse(attributes[6], DateTimeIT.DATETIME),
-              Boolean.parseBoolean(attributes[7])); 
+       return new PrenotazioneViaggioAereo(Integer.parseInt(attributes[0]), attributes[1],Integer.parseInt(attributes[2]),
+       TipoClasseMezzo.valueOf(attributes[3]),(attributes[4]),LocalDateTime.parse(attributes[5], DateTimeIT.DATETIME),
+             attributes[6],LocalDateTime.parse(attributes[7], DateTimeIT.DATETIME),
+              Boolean.parseBoolean(attributes[8])); 
     }
     
 }

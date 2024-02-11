@@ -13,54 +13,41 @@ import java.util.Objects;
  *
  * @author jessi
  */
-public class PrenotazioneAlloggioAppartamento extends PrenotazioneAlloggio<PrenotazioneAlloggioAppartamento> implements Comparable<PrenotazioneAlloggioAppartamento>{
+public class PrenotazioneAlloggioAppartamento extends PrenotazioneAlloggio<PrenotazioneAlloggioAppartamento>
+        implements Comparable<PrenotazioneAlloggioAppartamento> {
 
-    protected TipoAppartamento tipoAppartamento;
-    private final int codice ;
-    public static int nCodice = 0;//chiave
-    private static int lastCodice;
-    protected boolean cucina;
-    protected boolean parcheggio;
-    protected boolean animaliDomestici;
+    private TipoAppartamento tipoAppartamento;
 
-    public PrenotazioneAlloggioAppartamento(String nomeCliente,TipoAppartamento 
-            tipoAppartamento,  LocalDate dataInizioSoggiorno, LocalDate dataFineSoggiorno,boolean
-                    cucina, boolean parcheggio, boolean animaliDomestici) {
+    private int codice;
+    private boolean cucina;
+    private boolean parcheggio;
+    private boolean animaliDomestici;
+
+    public PrenotazioneAlloggioAppartamento(int codice, String nomeCliente, TipoAppartamento tipoAppartamento,
+            LocalDate dataInizioSoggiorno, LocalDate dataFineSoggiorno, boolean cucina, boolean parcheggio,
+            boolean animaliDomestici) {
         super(nomeCliente, dataInizioSoggiorno, dataFineSoggiorno);
-        this.codice = generaNextCodice();
+        this.codice = codice;
         this.tipoAppartamento = tipoAppartamento;
         this.cucina = cucina;
         this.parcheggio = parcheggio;
         this.animaliDomestici = animaliDomestici;
     }
- 
-    private  int generaNextCodice() {
-        return ++nCodice;
-    }
 
-   
-    public  int getCodice() {
+    public int getCodice() {
         return codice;
     }
 
-
-    
-public static void setLastCodice(int lastCodice) {
-        PrenotazioneAlloggioAppartamento.lastCodice= lastCodice;
-    }
     @Override
     public int calcolaPrezzoSoggiorno() {
-        int prezzo=0;
+        int prezzo = 0;
         prezzo += (int) DAYS.between(dataInizioSoggiorno, dataFineSoggiorno) * tipoAppartamento.costoPerNotte;
-        if (this.cucina) {
-            prezzo += 15*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
-        }
-        if (this.animaliDomestici) {
-            prezzo += 10*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
-        }
-        if (this.parcheggio) {
-            prezzo += 8*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
-        }
+        if (this.cucina)
+            prezzo += 15 * (int) DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
+        if (this.animaliDomestici)
+            prezzo += 10 * (int) DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
+        if (this.parcheggio)
+            prezzo += 8 * (int) DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
         return prezzo;
     }
 
@@ -106,7 +93,7 @@ public static void setLastCodice(int lastCodice) {
         hash = 31 * hash + (this.animaliDomestici ? 1 : 0);
         return hash;
     }
- 
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -136,39 +123,44 @@ public static void setLastCodice(int lastCodice) {
         }
         return true;
     }
+
     @Override
     public String toString() {
-        String stringa= "\nPrenotazioneAlloggioAppartamento\n" + "codice: " + this.codice +"\n"+super.toString()
-                + "\ntipologia appartamento: " + tipoAppartamento;
-        if(!cucina&&!parcheggio&&!animaliDomestici){
-            stringa+="\nla prenotazione non prevede costi aggiuntivi";
-        }else{
-            stringa+="\nla prenotazione prevede costi aggiuntivi, ovvero: ";
-            if(cucina){
-                stringa+="\ncucina";
+        String stringa = "\nPrenotazione Alloggio Appartamento\n" +
+                "Codice: " + this.codice + "\n" +
+                super.toString() + "\n" +
+                "Tipologia appartamento: " + tipoAppartamento;
+
+        if (!cucina && !parcheggio && !animaliDomestici) {
+            stringa += "\nLa prenotazione non prevede costi aggiuntivi";
+        } else {
+            stringa += "\nLa prenotazione prevede costi aggiuntivi, ovvero: ";
+            if (cucina) {
+                stringa += "\n- Cucina";
             }
-            if(animaliDomestici){
-                stringa+="\nanimali domestici";
+            if (animaliDomestici) {
+                stringa += "\n- Animali domestici";
             }
-            if(parcheggio){
-                stringa+="\nparcheggio";
+            if (parcheggio) {
+                stringa += "\n- Parcheggio";
             }
         }
-        stringa+="\nPrezzo Soggiorno: "+calcolaPrezzoSoggiorno();
-        stringa+="\n---------------------------------\n";
+
+        stringa += "\nPrezzo Soggiorno: " + calcolaPrezzoSoggiorno();
+        stringa += "\n---------------------------------\n";
+
         return stringa;
     }
-     
+
     @Override
     public int compareTo(PrenotazioneAlloggioAppartamento pA) {
         // ordinamento per codice crescente
         return this.codice - pA.codice;
     }
-    
-      @Override
+
+    @Override
     public PrenotazioneAlloggioAppartamento clone() throws CloneNotSupportedException {
         return (PrenotazioneAlloggioAppartamento) super.clone();
     }
-    
 
 }

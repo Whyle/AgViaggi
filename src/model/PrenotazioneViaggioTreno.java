@@ -12,30 +12,27 @@ import java.util.Objects;
  *
  * @author jessi
  */
-public class PrenotazioneViaggioTreno extends PrenotazioneViaggio<PrenotazioneViaggioTreno> implements Comparable<PrenotazioneViaggioTreno>{
-    public static int nCodice = 0;
-    private static int lastCodice;
-    protected final int codice;//chiave
-    protected TipoClasseMezzo tipoClasseMezzo;
-    protected boolean finestrino;
-    //protected boolean tavolino;
-    private  int generaNextCodice() {
-        return ++nCodice;
-    }
-   public  int getCodice() {
+public class PrenotazioneViaggioTreno extends PrenotazioneViaggio<PrenotazioneViaggioTreno>
+        implements Comparable<PrenotazioneViaggioTreno> {
+    private TipoClasseMezzo tipoClasseMezzo;
+
+    private int codice;// chiave
+    private boolean finestrino;
+
+
+    public int getCodice() {
         return codice;
     }
-public static void setLastCodice(int lastCodice) {
-        PrenotazioneViaggioTreno.lastCodice= lastCodice;
-    }
-    public PrenotazioneViaggioTreno(String nomeCliente, int nPasseggeri,TipoClasseMezzo tipoClasseMezzo, String LuogoPartenza, LocalDateTime dataPartenza,
+
+    public PrenotazioneViaggioTreno(int codice, String nomeCliente, int nPasseggeri, TipoClasseMezzo tipoClasseMezzo,
+            String LuogoPartenza, LocalDateTime dataPartenza,
             String LuogoArrivo, LocalDateTime dataArrivo, boolean finestrino) {
         super(nomeCliente, nPasseggeri, LuogoPartenza, dataPartenza, LuogoArrivo, dataArrivo);
-        this.codice=generaNextCodice();
+        this.codice = codice;
         this.tipoClasseMezzo = tipoClasseMezzo;
         this.finestrino = finestrino;
     }
-  
+
     public TipoClasseMezzo getTipoClasseMezzo() {
         return tipoClasseMezzo;
     }
@@ -51,15 +48,17 @@ public static void setLastCodice(int lastCodice) {
     public void setFinestrino(boolean finestrino) {
         this.finestrino = finestrino;
     }
- @Override
+
+    @Override
     public int calcolaPrezzoViaggio() {
-         int prezzo=0;
-        prezzo +=nPasseggeri * tipoClasseMezzo.costoPerPersona;
+        int prezzo = 0;
+        prezzo += nPasseggeri * tipoClasseMezzo.costoPerPersona;
         if (this.finestrino) {
-            prezzo =+ 7;
+            prezzo = +7;
         }
         return prezzo;
     }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -81,31 +80,39 @@ public static void setLastCodice(int lastCodice) {
             return false;
         }
         final PrenotazioneViaggioTreno other = (PrenotazioneViaggioTreno) obj;
+        if (this.finestrino != other.finestrino) {
+            return false;
+        }
+        if (!Objects.equals(this.codice, other.codice)) {
+            return false;
+        }
         return true;
     }
 
-     @Override
+    @Override
     public String toString() {
-        String stringa= "\nPrenotazioneViaggioTreno\n" + "codice: " + this.codice +"\n"+super.toString()
+        String stringa = "\nPrenotazioneViaggioTreno\n" + "codice: " + this.codice + "\n" + super.toString()
                 + "\ntipologia classe: " + tipoClasseMezzo;
-        if(!finestrino){
-            stringa+="\nla prenotazione non prevede costi aggiuntivi";
-        }else{
-            stringa+="\nla prenotazione prevede costi aggiuntivi, ovvero: ";
-            if(finestrino){
-                stringa+="\nfinestrino";
+        if (!finestrino) {
+            stringa += "\nla prenotazione non prevede costi aggiuntivi";
+        } else {
+            stringa += "\nla prenotazione prevede costi aggiuntivi, ovvero: ";
+            if (finestrino) {
+                stringa += "\nfinestrino";
             }
         }
-        stringa+="\nPrezzo Soggiorno: "+calcolaPrezzoViaggio();
-        stringa+="\n---------------------------------\n";
+        stringa += "\nPrezzo Soggiorno: " + calcolaPrezzoViaggio();
+        stringa += "\n---------------------------------\n";
         return stringa;
     }
+
     @Override
     public int compareTo(PrenotazioneViaggioTreno pA) {
         // ordinamento per codice crescente
         return this.codice - pA.codice;
     }
-     @Override
+
+    @Override
     public PrenotazioneViaggioTreno clone() throws CloneNotSupportedException {
         return (PrenotazioneViaggioTreno) super.clone();
     }

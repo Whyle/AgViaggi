@@ -13,57 +13,47 @@ import java.util.Objects;
  *
  * @author jessi
  */
-public class PrenotazioneAlloggioVillaggio extends PrenotazioneAlloggio<PrenotazioneAlloggioVillaggio> implements Comparable<PrenotazioneAlloggioVillaggio> {
+public class PrenotazioneAlloggioVillaggio extends PrenotazioneAlloggio<PrenotazioneAlloggioVillaggio>
+        implements Comparable<PrenotazioneAlloggioVillaggio> {
 
-    private final int codice ;
-    public static int nCodice = 0;//chiave  
-    private static int lastCodice;
-    protected TipoStrutturaVillaggio tipoSrutturaVillaggio;
-    protected boolean cucina;
-    protected boolean parcheggio;
-    protected boolean animaliDomestici;
-    protected boolean animazione;
+    private TipoStrutturaVillaggio tipoSrutturaVillaggio;
 
-    public PrenotazioneAlloggioVillaggio(String nomeCliente,TipoStrutturaVillaggio tipoSrutturaVillaggio, 
+    private int codice;
+    private boolean cucina;
+    private boolean parcheggio;
+    private boolean animaliDomestici;
+    private boolean animazione;
+
+    public PrenotazioneAlloggioVillaggio(int codice, String nomeCliente, TipoStrutturaVillaggio tipoSrutturaVillaggio,
             LocalDate dataInizioSoggiorno, LocalDate dataFineSoggiorno,
             boolean cucina, boolean parcheggio, boolean animaliDomestici, boolean animazione) {
         super(nomeCliente, dataInizioSoggiorno, dataFineSoggiorno);
-        this.codice=generaNextCodice() ;
+        this.codice = codice;
         this.tipoSrutturaVillaggio = tipoSrutturaVillaggio;
         this.cucina = cucina;
         this.parcheggio = parcheggio;
         this.animaliDomestici = animaliDomestici;
         this.animazione = animazione;
     }
-  
-    private int generaNextCodice() {
-        return nCodice++;
-    }
-  public  int getCodice() {
+
+    public int getCodice() {
         return codice;
     }
-    public static void setLastCodice(int lastCodice) {
-        PrenotazioneAlloggioVillaggio.lastCodice= lastCodice;
-    }
+
     @Override
     public int calcolaPrezzoSoggiorno() {
-         int prezzo=0;
+        int prezzo = 0;
         prezzo += (int) DAYS.between(dataInizioSoggiorno, dataFineSoggiorno) * tipoSrutturaVillaggio.costoPerNotte;
-        if (this.animazione) {
-            prezzo += 20*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
-        }
-        if (this.animaliDomestici) {
-            prezzo += 5*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
-        }
-        if (this.cucina) {
-            prezzo += 15*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
-        }
-        if (this.parcheggio) {
-            prezzo += 8*(int)DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
-        }
+        if (this.animazione)
+            prezzo += 20 * (int) DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
+        if (this.animaliDomestici)
+            prezzo += 5 * (int) DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
+        if (this.cucina)
+            prezzo += 15 * (int) DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
+        if (this.parcheggio)
+            prezzo += 8 * (int) DAYS.between(dataInizioSoggiorno, dataFineSoggiorno);
         return prezzo;
     }
-
 
     public TipoStrutturaVillaggio getTipoStrutturaVillaggio() {
         return tipoSrutturaVillaggio;
@@ -153,37 +143,46 @@ public class PrenotazioneAlloggioVillaggio extends PrenotazioneAlloggio<Prenotaz
         }
         return true;
     }
+
     @Override
     public String toString() {
-        String stringa= "\nPrenotazioneAlloggioVillaggio\n" + "codice: " + this.codice +"\n"+super.toString()
-                + "\ntipologia sruttura abitazione nel villaggio: " + tipoSrutturaVillaggio;
-        if(!cucina&&!parcheggio&&!animaliDomestici&&!animazione){
-            stringa+="\nla prenotazione non prevede costi aggiuntivi";
-        }else{
-            stringa+="\nla prenotazione prevede costi aggiuntivi, ovvero: ";
-            if(cucina){
-                stringa+="\ncucina";
+        String stringa = "\nPrenotazione Alloggio Villaggio\n" +
+                "Codice: " + this.codice + "\n" +
+                super.toString() + "\n" +
+                "Tipologia struttura abitazione nel villaggio: " + tipoSrutturaVillaggio;
+    
+        if (!cucina && !parcheggio && !animaliDomestici && !animazione) {
+            stringa += "\nLa prenotazione non prevede costi aggiuntivi";
+        } else {
+            stringa += "\nLa prenotazione prevede costi aggiuntivi, ovvero: ";
+            if (cucina) {
+                stringa += "\n- Cucina";
             }
-            if(animaliDomestici){
-                stringa+="\nanimali domestici";
+            if (animaliDomestici) {
+                stringa += "\n- Animali domestici";
             }
-            if(parcheggio){
-                stringa+="\nparcheggio";
+            if (parcheggio) {
+                stringa += "\n- Parcheggio";
             }
-            if(animazione){
-                stringa+="\nanimazione";
+            if (animazione) {
+                stringa += "\n- Animazione";
             }
         }
-        stringa+="\nPrezzo Soggiorno: "+calcolaPrezzoSoggiorno();
-        stringa+="\n---------------------------------\n";
+    
+        stringa += "\nPrezzo Soggiorno: " + calcolaPrezzoSoggiorno();
+        stringa += "\n---------------------------------\n";
+    
         return stringa;
     }
+    
+
     @Override
-public int compareTo(PrenotazioneAlloggioVillaggio pA) {
+    public int compareTo(PrenotazioneAlloggioVillaggio pA) {
         // ordinamento per codice crescente
         return this.codice - pA.codice;
     }
-@Override
+
+    @Override
     public PrenotazioneAlloggioVillaggio clone() throws CloneNotSupportedException {
         return (PrenotazioneAlloggioVillaggio) super.clone();
     }
